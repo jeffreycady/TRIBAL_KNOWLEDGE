@@ -483,10 +483,11 @@ const NODES = {
     ]
   },
   q2:{
-    text:"Are you (or they) thinking clearly — able to say your name, where you are, what's going on? Or is there confusion, slurred speech, or acting strangely?",
+    text:"Are you (or they) thinking clearly — able to say your name, where you are, what's going on? Is there confusion, slurred speech, or acting strangely? And is there any chest pressure, squeezing, or tightness, even if it seems mild?",
     opts:[
       {label:"Confusion, slurred speech, or acting strangely", next:'out_emergency'},
-      {label:"Thinking clearly, just feel bad", next:'q3'}
+      {label:"Chest pressure, squeezing, or tightness", next:'out_chest_cardiac'},
+      {label:"Thinking clearly, no chest symptoms, just feel bad", next:'q3'}
     ]
   },
   q3:{
@@ -511,9 +512,10 @@ const NODES = {
     ]
   },
   q_eac:{
-    text:"Now that you've stopped, are you (or they) alert and able to answer normally, and does lying down with legs raised start to help within a few minutes?",
+    text:"Now that you've stopped, are you (or they) alert and able to answer normally? Is there any chest pressure, squeezing, or tightness? And does lying down with legs raised start to help within a few minutes?",
     opts:[
-      {label:"Yes — alert, and elevating legs helps", next:'out_eac'},
+      {label:"Chest pressure, squeezing, or tightness", next:'out_chest_cardiac'},
+      {label:"Yes — alert, no chest symptoms, and elevating legs helps", next:'out_eac'},
       {label:"No improvement, or not fully alert", next:'out_emergency'}
     ]
   },
