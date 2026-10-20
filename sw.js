@@ -5,9 +5,10 @@
    Bump CACHE_VERSION whenever index.html or any shell file changes so
    returning users pick up the new content. */
 
-const CACHE_VERSION = 'tk-v8';
+const CACHE_VERSION = 'tk-v9';
 const SHELL_CACHE = `${CACHE_VERSION}-shell`;
 const RUNTIME_CACHE = `${CACHE_VERSION}-runtime`;
+const NETWORK_TIMEOUT_MS = 3000;
 
 const SHELL_ASSETS = [
   './',
@@ -57,18 +58,21 @@ self.addEventListener('fetch', (event) => {
   // The app's own files (pages, scripts, styles, content): network first, so
   // every online visit gets the latest version. The cache is the offline fallback.
   if (isSameOrigin) {
+    // If the network is slow (one bar on a trail), stop waiting after NETWORK_TIMEOUT_MS
+    // and serve the cached copy. The fetch keeps running and refreshes the cache when it lands.
+    const network = fetch(request).then((res) => {
+      if (res && res.ok) {
+        const copy = res.clone();
+        caches.open(RUNTIME_CACHE).then((c) => c.put(request, copy));
+      }
+      return res;
+    });
+    const fromCache = () => caches.match(request, { ignoreSearch: true }).then((cached) =>
+      cached || (request.mode === 'navigate' ? caches.match('./index.html', { ignoreSearch: true }) : Response.error())
+    );
+    const timeout = new Promise((resolve) => setTimeout(resolve, NETWORK_TIMEOUT_MS, null));
     event.respondWith(
-      fetch(request).then((res) => {
-        if (res && res.ok) {
-          const copy = res.clone();
-          caches.open(RUNTIME_CACHE).then((c) => c.put(request, copy));
-        }
-        return res;
-      }).catch(() =>
-        caches.match(request, { ignoreSearch: true }).then((cached) =>
-          cached || (request.mode === 'navigate' ? caches.match('./index.html', { ignoreSearch: true }) : Response.error())
-        )
-      )
+      Promise.race([network.catch(() => null), timeout]).then((res) => res || fromCache())
     );
     return;
   }
