@@ -2,7 +2,7 @@
    Every outcome cites a source. Keep ids stable when editing.
    To suggest a change, open contribute.html. */
 
-const GEAR_IDS = new Set(['out_sb_bike','out_sb_run','out_sb_plan','out_sb_essentials','sb_root','start-backcountry','out_blue_bag_how','out_blue_bag_where','out_water_treat','out_filter_sawyer','out_filter_platypus','out_filter_general','out_catholes','out_waste_bag','gs_root','gear-sanitation','out_lost','out_cold','out_fuel_plan','out_fuel_ultra','out_pacing_early','out_exit_plan','gl_root','gc_root','gf_root','gp_root','gx_root']);
+const GEAR_IDS = new Set(['start-bike','sbb_root','out_sb_bike','out_sb_run','out_sb_plan','out_sb_essentials','sb_root','start-backcountry','out_blue_bag_how','out_blue_bag_where','out_water_treat','out_filter_sawyer','out_filter_platypus','out_filter_general','out_catholes','out_waste_bag','gs_root','gear-sanitation','out_lost','out_cold','out_fuel_plan','out_fuel_ultra','out_pacing_early','out_exit_plan','gl_root','gc_root','gf_root','gp_root','gx_root']);
 
 Object.assign(OUTCOMES, {
   out_fuel_ultra:{
@@ -323,7 +323,20 @@ Object.assign(OUTCOMES, {
   }
 });
 
-NODES.sb_root.opts.splice(1,0,{label:"I'm going to ride a bike in the backcountry", next:'out_sb_bike'});
+Object.assign(NODES, {
+  sbb_root:{
+    text:"What do you need to know before a bike trip in the backcountry?",
+    opts:[
+      {label:"I'm going to ride a bike in the backcountry", next:'out_sb_bike'},
+      {label:"I need clean water", next:'out_water_treat'},
+      {label:"I need to poop", next:'out_catholes'}
+    ]
+  }
+});
+
+DECISION_TREES.push(
+  { id:'start-bike', sports:['mtb','gravel','bikepacking'], category:'gear', title:"Start here: bike trips in the backcountry", blurb:"The basics for planning, packing, and fixing a bike in remote terrain.", root:'sbb_root' }
+);
 
 DECISION_TREES.push(
   { id:'start-backcountry', sports:['ultra','trail-run','hiking','mtb','gravel','bikepacking','trekking','sky','skimo','mountaineering','climbing','snowshoe'], category:'gear', title:"Start here: trails and backcountry", blurb:"The basics for planning and packing before you head out.", root:'sb_root' }
