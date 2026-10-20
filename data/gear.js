@@ -2,7 +2,7 @@
    Every outcome cites a source. Keep ids stable when editing.
    To suggest a change, open contribute.html. */
 
-const GEAR_IDS = new Set(['out_blue_bag_how','out_blue_bag_where','out_water_treat','out_filter_sawyer','out_filter_platypus','out_filter_general','out_catholes','out_waste_bag','gs_root','gear-sanitation','out_lost','out_cold','out_fuel_plan','out_fuel_ultra','out_pacing_early','out_exit_plan','gl_root','gc_root','gf_root','gp_root','gx_root']);
+const GEAR_IDS = new Set(['out_sb_plan','out_sb_essentials','sb_root','start-backcountry','out_blue_bag_how','out_blue_bag_where','out_water_treat','out_filter_sawyer','out_filter_platypus','out_filter_general','out_catholes','out_waste_bag','gs_root','gear-sanitation','out_lost','out_cold','out_fuel_plan','out_fuel_ultra','out_pacing_early','out_exit_plan','gl_root','gc_root','gf_root','gp_root','gx_root']);
 
 Object.assign(OUTCOMES, {
   out_fuel_ultra:{
@@ -209,4 +209,54 @@ Object.assign(NODES, {
   }
 });
 
-const GEAR_DIRECT = ['out_blue_bag_how','out_blue_bag_where','out_water_treat','out_filter_sawyer','out_filter_platypus','out_filter_general','out_catholes','out_waste_bag','out_lost','out_cold','out_fuel_plan','out_fuel_ultra','out_pacing_early','out_exit_plan'];
+Object.assign(OUTCOMES, {
+  out_sb_plan:{
+    severity:'low', band:'Start here', title:"Before you go: plan, tell someone, and know your route",
+    body:"Backcountry means you are far from help, so the planning you do at home matters most. The National Park Service says to tell someone where you are going and when to expect you back. Know how to use your map and compass or GPS before you go, and bring a paper map as a backup. Prepare for sudden changes in weather.",
+    steps:[
+      "Tell a trusted person where you are going, which trail or area, and when you expect to be back. Tell them when to call for help if you don't return.",
+      "Learn to read a topographic map and use a compass or GPS before you leave home.",
+      "Carry a paper map as a backup, even if you use a phone or GPS.",
+      "Check the weather for the area, and plan for it to change quickly.",
+      "Check the area's rules before you go. Some parks require permits or have fire restrictions."
+    ],
+    action:"Write down your route and return time, leave a copy with someone, and practice using your map before you go.",
+    source:{title:"The Ten Essentials", host:"U.S. National Park Service", url:"https://www.nps.gov/articles/10essentials.htm"}
+  },
+  out_sb_essentials:{
+    severity:'low', band:'Pack these', title:"What to pack: the Ten Essentials",
+    body:"The National Park Service recommends carrying these ten categories of gear on every trip, whether it's a short walk or an overnight. They are navigation, sun protection, extra clothing, illumination, first-aid supplies, fire, a repair kit and tools, extra food, water and treatment, and emergency shelter.",
+    steps:[
+      "Navigation: a map, a compass, and a GPS. Bring a paper map as a backup.",
+      "Sun protection: sunglasses, sunscreen, and a hat.",
+      "Extra clothing: a jacket, hat, gloves, and a rain shell. Choose bright colors so rescuers can spot you.",
+      "Illumination: a headlamp or flashlight, and spare batteries. A headlamp keeps your hands free.",
+      "First-aid supplies: a kit for your trip, with any regular medications you take.",
+      "Fire: matches or a lighter, plus fire starters. Know the area's fire rules.",
+      "Repair kit and tools: duct tape, a knife, a multi-tool, and scissors.",
+      "Nutrition: an extra day's worth of mostly no-cook, energy-rich food.",
+      "Hydration: water, and supplies to treat water. Drink before you feel thirsty.",
+      "Emergency shelter: a tent, space blanket, tarp, or bivy."
+    ],
+    action:"Check your pack against this list before you leave home, then again before you start hiking.",
+    source:{title:"The Ten Essentials", host:"U.S. National Park Service", url:"https://www.nps.gov/articles/10essentials.htm"}
+  }
+});
+
+Object.assign(NODES, {
+  sb_root:{
+    text:"What do you need to know before a trail or backcountry trip?",
+    opts:[
+      {label:"How do I plan my trip?", next:'out_sb_plan'},
+      {label:"What should I pack?", next:'out_sb_essentials'},
+      {label:"I need clean water", next:'out_water_treat'},
+      {label:"I need to poop", next:'out_catholes'}
+    ]
+  }
+});
+
+DECISION_TREES.push(
+  { id:'start-backcountry', sports:['ultra','trail-run','hiking','mtb','gravel','bikepacking','trekking','sky','skimo','mountaineering','climbing','snowshoe'], category:'gear', title:"Start here: trails and backcountry", blurb:"The basics for planning and packing before you head out.", root:'sb_root' }
+);
+
+const GEAR_DIRECT = ['out_sb_plan','out_sb_essentials','out_blue_bag_how','out_blue_bag_where','out_water_treat','out_filter_sawyer','out_filter_platypus','out_filter_general','out_catholes','out_waste_bag','out_lost','out_cold','out_fuel_plan','out_fuel_ultra','out_pacing_early','out_exit_plan'];
