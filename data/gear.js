@@ -110,8 +110,8 @@ Object.assign(NODES, {
   gs_root:{
     text:"What do you need?",
     opts:[
-      {label:"I need to go to the bathroom on a trail or in the backcountry", next:'out_catholes'},
-      {label:"I'm going somewhere that may require carrying my waste out", next:'out_waste_bag'}
+      {label:"I need to poop", next:'out_catholes'},
+      {label:"Do I have to carry my poop out?", next:'out_waste_bag'}
     ]
   }
 });
@@ -153,9 +153,9 @@ Object.assign(OUTCOMES, {
 });
 
 NODES.gs_root.opts.push(
-  {label:"How do I use a pack-out (blue) bag?", next:'out_blue_bag_how'},
-  {label:"Which parks or areas require me to carry waste out?", next:'out_blue_bag_where'},
-  {label:"I need to treat water before drinking it, or I'm not sure it's safe", next:'out_water_treat'},
-  {label:"My water filter is running slowly", next:'out_filter_slow'}
+  {label:"How do I use a blue bag?", next:'out_blue_bag_how'},
+  {label:"Which parks make me carry it out?", next:'out_blue_bag_where'},
+  {label:"I need clean water", next:'out_water_treat'},
+  {label:"My water filter is slow", next:'out_filter_slow'}
 );
 const GEAR_DIRECT = ['out_blue_bag_how','out_blue_bag_where','out_water_treat','out_filter_slow','out_catholes','out_waste_bag','out_lost','out_cold','out_fuel_plan','out_fuel_ultra','out_pacing_early','out_exit_plan'];
