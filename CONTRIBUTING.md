@@ -25,7 +25,7 @@ To suggest something new (a question, an outcome, a whole category), open a new 
 
 ## Data format
 
-Content lives in `data/physical.js` and `data/mental.js`.
+Content lives in `data/physical.js`, `data/mental.js`, `data/gear.js` and `data/training.js`.
 
 - `OUTCOMES`: keyed by id. Fields: `severity` (`low` | `mid` | `high`), optional `band` (the label above the outcome), `title`, optional `symptoms`, `body`, `action`, optional `prevention`, `source` (`title`, `host`, `url`).
 - `NODES`: keyed by id. Fields: `text` (the question), `opts`: a list of `{label, next}`, where `next` is a node id or an outcome id.

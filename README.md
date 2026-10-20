@@ -38,7 +38,7 @@ assets/               Cairn logo (jcady.org brand)
 icon-*.png            App icons, full-bleed for iOS/Android
 ROADMAP.md            Where this is going
 CONTRIBUTING.md       Rules and steps for suggesting changes
-docs/                 Architecture, Android build notes
+docs/                 Architecture (with UML diagrams), UI spec, Android build notes
 ```
 
 ## Run it locally
