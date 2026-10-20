@@ -5,7 +5,7 @@
    Bump CACHE_VERSION whenever index.html or any shell file changes so
    returning users pick up the new content. */
 
-const CACHE_VERSION = 'tk-v2';
+const CACHE_VERSION = 'tk-v3';
 const SHELL_CACHE = `${CACHE_VERSION}-shell`;
 const RUNTIME_CACHE = `${CACHE_VERSION}-runtime`;
 
@@ -14,7 +14,9 @@ const SHELL_ASSETS = [
   './index.html',
   './manifest.json',
   './icon-192.png',
-  './icon-512.png'
+  './icon-512.png',
+  './favicon-32.png',
+  './assets/cairn-logo.svg'
 ];
 
 self.addEventListener('install', (event) => {
