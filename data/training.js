@@ -2,7 +2,7 @@
    Every outcome cites a source. Keep ids stable when editing.
    To suggest a change, open contribute.html. */
 
-const TRAIN_IDS = new Set(['out_plateau_vary','out_taper','out_sleep','tp_root','tt_root','tr_root']);
+const TRAIN_IDS = new Set(['out_plateau_vary','out_taper','out_sleep','out_reds_suspected','out_reds_urgent','tp_root','tt_root','tr_root']);
 
 Object.assign(OUTCOMES, {
   out_plateau_vary:{
@@ -23,6 +23,21 @@ Object.assign(OUTCOMES, {
     body:"A review in Frontiers in Physiology (Taylor and colleagues, 2016) notes that inadequate sleep has been linked to reduced physical performance, and that sleep is widely considered important for reducing illness and injury. The article doesn't establish how large the performance effect is, so treat sleep as a priority rather than a precise lever. It's an opinion piece, so weigh it accordingly.",
     action:"Keep a regular bedtime and wake time for the next two weeks. Protect sleep before hard sessions. If sleep stays poor for more than two weeks, or you notice low mood, see a clinician. The Mental & Psychological section covers that path.",
     source:{title:"Sleep Medication and Athletic Performance: The Evidence for Practitioners and Future Research Directions", host:"Frontiers in Physiology (2016)", url:"https://www.frontiersin.org/journals/physiology/articles/10.3389/fphys.2016.00083/full"}
+  }
+});
+
+Object.assign(OUTCOMES, {
+  out_reds_suspected:{
+    severity:'mid', band:'Talk to a clinician soon', title:"Possible REDs: not eating enough for the training you do",
+    body:"REDs (Relative Energy Deficiency in Sport) happens when energy intake doesn't cover what training uses. The IOC consensus (Mountjoy and colleagues, 2018) links it to effects on metabolism, menstrual function, bone health, immunity, the gut, and mental health. Warning signs include missed periods, bone or stress-injury pain, frequent illness, and unexplained weight loss. Men are affected too.",
+    action:"Don't add training volume until someone has assessed you. Eat more, especially around hard sessions. See a sports doctor or sports dietitian soon, and tell them what you've described. If you're restricting food or feel stuck in that pattern, a clinician can help, and the Mental & Psychological section covers that path. If you have thoughts of harming yourself, call or text 988 (US) now.",
+    source:{title:"IOC consensus statement on relative energy deficiency in sport (RED-S): 2018 update", host:"British Journal of Sports Medicine (2018)", url:"https://bjsm.bmj.com/content/52/11/687"}
+  },
+  out_reds_urgent:{
+    severity:'high', band:'Seek medical care now', title:"Fainting, chest pain, or a very slow pulse with low energy",
+    body:"Severe low energy availability can cause dangerously low heart rate and blood pressure, dizziness on standing, and electrolyte imbalance. The IOC consensus says severe cases may need inpatient care.",
+    action:"Stop training. Don't drive yourself. If you've fainted, have chest pain, are confused, or are struggling to breathe, call emergency services now. Otherwise go to the nearest emergency department today and say you think you're not eating enough for your training.",
+    source:{title:"IOC consensus statement on relative energy deficiency in sport (RED-S): 2018 update", host:"British Journal of Sports Medicine (2018)", url:"https://bjsm.bmj.com/content/52/11/687"}
   }
 });
 
@@ -50,10 +65,15 @@ Object.assign(NODES, {
   }
 });
 
+// REDs branches on the training trees
+NODES.tr_root.opts.unshift({label:"Fainting, dizziness when standing, chest pain, or a very slow pulse", next:'out_reds_urgent'});
+NODES.tr_root.opts.push({label:"Missed periods, bone or stress-injury pain, frequent illness, or unexplained weight loss", next:'out_reds_suspected'});
+NODES.tp_root.opts.push({label:"Months of tiredness with missed periods, bone pain, or frequent illness", next:'out_reds_suspected'});
+
 DECISION_TREES.push(
   { id:'training-plateau', category:'training', title:"Stuck, not improving", blurb:"A plateau usually means the training needs a change, not more of the same.", root:'tp_root' },
   { id:'training-taper', category:'training', title:"Race coming up: tapering", blurb:"How much to cut in the final weeks is one of the most useful decisions you'll make.", root:'tt_root' },
   { id:'training-recovery', category:'training', title:"Run-down, tired, or sleeping badly", blurb:"Tiredness is information. Work out whether it's sleep or training load.", root:'tr_root' }
 );
 
-const TRAIN_DIRECT = ['out_taper','out_plateau_vary','out_sleep'];
+const TRAIN_DIRECT = ['out_taper','out_plateau_vary','out_sleep','out_reds_suspected','out_reds_urgent'];
