@@ -5,7 +5,7 @@
    Bump CACHE_VERSION whenever index.html or any shell file changes so
    returning users pick up the new content. */
 
-const CACHE_VERSION = 'tk-v19';
+const CACHE_VERSION = 'tk-v20';
 const SHELL_CACHE = `${CACHE_VERSION}-shell`;
 const RUNTIME_CACHE = `${CACHE_VERSION}-runtime`;
 const NETWORK_TIMEOUT_MS = 3000;
@@ -27,6 +27,7 @@ const SHELL_ASSETS = [
   './data/mental.js',
   './data/gear.js',
   './data/training.js',
+  './data/glossary.js',
   './assets/screenshot-narrow.png',
   './assets/screenshot-wide.png'
 ];

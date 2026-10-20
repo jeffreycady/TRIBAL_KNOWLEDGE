@@ -30,6 +30,7 @@ data/physical.js      Physical & Medical questions, answers, outcomes, sources
 data/mental.js        Mental & Psychological content
 data/gear.js          Gear & Logistics content
 data/training.js      Training content
+data/glossary.js      Glossary terms (home page search)
 contribute.html/.js   Public page: how it works, the logic, edit links
 styles.css            Shared styles (app and contribute page)
 sw.js                 Service worker: offline cache, network-first for data

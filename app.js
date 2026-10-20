@@ -38,6 +38,20 @@ function footer(){
   return `<div class="tk-footer">Tribal Knowledge · © 2026 <a href="https://jcady.org" target="_blank" rel="noopener">JCady LLC</a> · works offline, nothing you enter is stored or sent anywhere · <a href="contribute.html">Suggest an update</a></div>`;
 }
 
+function glossaryList(q){
+  const needle = (q || '').trim().toLowerCase();
+  const items = GLOSSARY.filter(g => !needle ||
+    g.term.toLowerCase().includes(needle) ||
+    g.aliases.some(a => a.toLowerCase().includes(needle)) ||
+    g.def.toLowerCase().includes(needle));
+  if(!items.length) return `<p class="gloss-empty">No match. Try a shorter word, or <a href="contribute.html">suggest the term</a>.</p>`;
+  return items.map(g => `
+    <div class="gloss-item">
+      <h4>${escapeHtml(g.term)}${g.kind === 'community' ? ' <span class="gloss-kind">Community usage</span>' : ''}</h4>
+      <p>${escapeHtml(g.def)}</p>
+    </div>`).join('');
+}
+
 function renderHub(){
   return `
   <div class="tk-hero">
@@ -62,6 +76,12 @@ function renderHub(){
         `).join('')}
       </div>
       <div class="tk-section-sub">Know something that should be here? <a href="contribute.html">Suggest an update &rarr;</a></div>
+      <div class="gloss" id="glossary">
+        <div class="tk-section-title">Glossary</div>
+        <div class="tk-section-sub">Ultra and running words, explained. Search, or scroll.</div>
+        <input class="gloss-search" id="gloss-q" type="search" placeholder="Search, like bonk, DFL, or cutoff" aria-label="Search the glossary" autocomplete="off">
+        <div id="gloss-list" class="gloss-list">${glossaryList('')}</div>
+      </div>
     </div>
   </div>
   ${footer()}`;
@@ -207,6 +227,10 @@ async function shareOutcome(id){
 }
 
 function attachEvents(){
+  const glossQ = document.getElementById('gloss-q');
+  if(glossQ) glossQ.addEventListener('input', () => {
+    document.getElementById('gloss-list').innerHTML = glossaryList(glossQ.value);
+  });
   document.querySelectorAll('[data-share]').forEach(el => {
     el.addEventListener('click', () => shareOutcome(el.dataset.share));
   });
