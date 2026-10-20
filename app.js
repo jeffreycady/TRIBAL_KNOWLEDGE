@@ -216,6 +216,8 @@ function renderOutcome(){
           <h5>Do this now</h5>
           <p>${escapeHtml(outcome.action)}</p>
         </div>
+        ${outcome.steps ? `<h5>Step by step</h5><ol class="steps">${outcome.steps.map(x => `<li>${escapeHtml(x)}</li>`).join('')}</ol>` : ''}
+        ${outcome.diagram ? `<figure class="diagram">${outcome.diagram}</figure>` : ''}
         ${outcome.prerace ? `<div class="uera-box">
           <h5>Racing soon?</h5>
           <p>Before race day, check your readiness across the whole plan with the Ultra Event Readiness &amp; Risk Assessment (UERA), built by Jeff Cady.</p>

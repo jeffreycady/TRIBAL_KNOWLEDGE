@@ -145,10 +145,20 @@ Object.assign(OUTCOMES, {
     source:{title:"Backcountry Water Treatment", host:"Centers for Disease Control and Prevention (CDC)", url:"https://www.cdc.gov/healthywater/pdf/drinking/Backcountry_Water_Treatment-508.pdf"}
   },
   out_filter_slow:{
-    severity:'low', band:'Clean it and backflush', title:"Filter flow is slow",
-    body:"A slow flow usually means the filter is clogged. The manufacturer says a forceful backflush, at a higher pressure than normal use, can restore most of the flow: up to 98.5 percent in its testing. A heavily clogged filter can be soaked in warm water to loosen the fibers. For mineral-rich water, the manufacturer suggests a vinegar soak.",
-    action:"Backflush with clean water, forcefully, following the manufacturer's steps. If the flow is still slow, soak the filter in warm water and try again. If it never recovers, check the manufacturer's guidance on replacement.",
-    source:{title:"Sawyer Filter Backwashing Tips and Tricks", host:"Sawyer (manufacturer resource)", url:"https://www.sawyer.com/resources/backwashing-tips-and-tricks"}
+    severity:'low', band:'Clean it and backflush', title:"My water filter is slow: clean it by backflushing",
+    body:"A slow filter is usually clogged with sediment inside the filter fibers. Pushing clean water backward through the filter, against the normal flow, pushes the sediment out. Sawyer says the key is to be forceful.",
+    steps:[
+      "Get clean water. Use water you have already treated, and fill a cleaning plunger with it. If you don't have a plunger, use a cleaning coupling and an empty plastic bottle.",
+      "Find the clean end of the filter. That is the end you drink from. Water normally flows in the dirty end and out the clean end.",
+      "Press the plunger onto the clean end of the filter.",
+      "Push hard to send clean water backward through the filter and out the dirty end.",
+      "Repeat the push until the water comes out clear and flows easily.",
+      "If it is still slow, soak the filter in hot water, no hotter than you can comfortably keep your finger in, for 2 hours. Then backflush again.",
+      "If your water is mineral-rich, soak the filter in vinegar for 30 minutes, then backflush with hot water."
+    ],
+    diagram:'<svg viewBox="0 0 440 170" role="img" aria-label="Backflush diagram: push clean water into the clean end of the filter, opposite the normal flow"><defs><marker id="ah" markerWidth="8" markerHeight="8" refX="6" refY="4" orient="auto"><path d="M0,0 L8,4 L0,8 z" fill="currentColor"/></marker></defs><rect x="30" y="50" width="70" height="40" rx="4" fill="none" stroke="currentColor" stroke-width="2"/><text x="65" y="75" text-anchor="middle" font-size="12" fill="currentColor">Plunger</text><text x="65" y="110" text-anchor="middle" font-size="12" fill="currentColor">Clean water</text><rect x="150" y="40" width="120" height="60" rx="6" fill="none" stroke="currentColor" stroke-width="2"/><text x="210" y="75" text-anchor="middle" font-size="13" fill="currentColor">Filter</text><text x="330" y="75" text-anchor="middle" font-size="12" fill="currentColor">Dirty end</text><line x1="104" y1="70" x2="146" y2="70" stroke="currentColor" stroke-width="2.5" marker-end="url(#ah)"/><text x="125" y="62" text-anchor="middle" font-size="11" fill="currentColor">Push</text><line x1="300" y1="130" x2="160" y2="130" stroke="currentColor" stroke-width="2" stroke-dasharray="5 4" marker-end="url(#ah)"/><text x="230" y="152" text-anchor="middle" font-size="11" fill="currentColor">Normal flow: dirty in, clean out</text></svg>',
+    action:"Backflush with clean water, forcefully, until the water runs clear. If it is still slow, soak the filter in warm water and backflush again.",
+    source:{title:"5 Sawyer Squeeze Hacks for Hikers", host:"Sawyer (manufacturer blog)", url:"https://www.sawyer.com/blog/5-sawyer-squeeze-hacks-for-hikers"}
   }
 });
 

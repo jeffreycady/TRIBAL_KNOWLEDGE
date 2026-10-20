@@ -204,3 +204,7 @@ h1,h2,h3,h4,h5{font-family:var(--tk-display);text-transform:uppercase;letter-spa
 .gloss-count{color:var(--dim);font-size:13px;margin:0 0 4px;font-family:var(--tk-mono);text-transform:uppercase;letter-spacing:.05em;}
 .link-list{margin:6px 0 0 18px;padding:0;}
 .link-list li{margin:4px 0;}
+.steps{margin:6px 0 0 20px;padding:0;}
+.steps li{margin:6px 0;}
+.diagram{margin:12px 0;}
+.diagram svg{width:100%;max-width:440px;height:auto;color:inherit;}
