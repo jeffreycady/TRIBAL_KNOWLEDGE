@@ -2,7 +2,7 @@
    Every outcome cites a source. Keep ids stable when editing.
    To suggest a change, open contribute.html. */
 
-const GEAR_IDS = new Set(['out_lost','out_cold','out_fuel_plan','out_fuel_ultra','out_pacing_early','out_exit_plan','gl_root','gc_root','gf_root','gp_root','gx_root']);
+const GEAR_IDS = new Set(['out_catholes','out_waste_bag','gs_root','gear-sanitation','out_lost','out_cold','out_fuel_plan','out_fuel_ultra','out_pacing_early','out_exit_plan','gl_root','gc_root','gf_root','gp_root','gx_root']);
 
 Object.assign(OUTCOMES, {
   out_fuel_ultra:{
@@ -91,4 +91,35 @@ DECISION_TREES.push(
   { id:'gear-pacing', category:'gear', title:"Pacing: went out too fast, or slowing late", blurb:"Plan the pace and the fuel together.", root:'gp_root' }
 );
 
-const GEAR_DIRECT = ['out_lost','out_cold','out_fuel_plan','out_fuel_ultra','out_pacing_early','out_exit_plan'];
+Object.assign(OUTCOMES, {
+  out_catholes:{
+    sports:['ultra','trail-run','hiking','mtb','gravel','bikepacking','trekking','sky','skimo','mountaineering','climbing','snowshoe'],
+    severity:'low', band:'Dig it right', title:"Going to the bathroom on the trail: the cat hole",
+    body:"Leave No Trace guidance is to dig a cat hole 6 to 8 inches deep and 4 to 6 inches wide, at least 200 feet (about 70 to 80 adult paces) from water, trails, and camp. Cover it with natural material when you finish. Bury toilet paper deep in the hole or pack it out. Menstrual products and wipes should be packed out.",
+    action:"Carry a small trowel and hand sanitizer that doesn't need rinsing. Walk at least 200 feet away from water, trails, and camp, and avoid sandy washes and low spots where runoff collects. Dig the hole, go, cover it, and sanitize your hands. Pack out what you don't bury.",
+    source:{title:"Principle 3: Dispose of Waste Properly", host:"Leave No Trace Center for Outdoor Ethics", url:"https://lnt.org/learn/principle-3"}
+  },
+  out_waste_bag:{
+    sports:['ultra','trail-run','hiking','mtb','gravel','bikepacking','trekking','sky','skimo','mountaineering','climbing','snowshoe'],
+    severity:'mid', band:'Check the rules first', title:"Some areas require you to carry your waste out",
+    body:"Some places require you to pack out solid human waste. Zion National Park requires carrying it out from all canyons, including the Narrows, and offers disposal bags at its bookstore and through local outfitters. Leave No Trace also notes that land managers may require pack-out in fragile settings, such as narrow canyons.",
+    action:"Check the land manager's rules before you go, including any bag or permit requirement. Carry a pack-out waste bag sized for your trip, and carry out used toilet paper and hygiene products. Dispose of the bag only where the land manager says to.",
+    source:{title:"Zion National Park: Carry Out Solid Human Waste (park staff statements)", host:"National Parks Traveler (2025)", url:"https://www.nationalparkstraveler.org/node/20195"}
+  }
+});
+
+Object.assign(NODES, {
+  gs_root:{
+    text:"What do you need?",
+    opts:[
+      {label:"I need to go to the bathroom on a trail or in the backcountry", next:'out_catholes'},
+      {label:"I'm going somewhere that may require carrying my waste out", next:'out_waste_bag'}
+    ]
+  }
+});
+
+DECISION_TREES.push(
+  { id:'gear-sanitation', sports:['ultra','trail-run','hiking','mtb','gravel','bikepacking','trekking','sky','skimo','mountaineering','climbing','snowshoe'], category:'gear', title:"Bathroom and waste in the backcountry", blurb:"Where to go, how to dig, and when you have to carry it out.", root:'gs_root' }
+);
+
+const GEAR_DIRECT = ['out_catholes','out_waste_bag','out_lost','out_cold','out_fuel_plan','out_fuel_ultra','out_pacing_early','out_exit_plan'];
