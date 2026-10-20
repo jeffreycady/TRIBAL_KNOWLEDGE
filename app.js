@@ -286,6 +286,7 @@ function attachEvents(){
   document.querySelectorAll('[data-nav]').forEach(el => {
     el.addEventListener('click', () => {
       const nav = el.dataset.nav;
+      const keepSport = state.sport;
       if(nav === 'hub'){
         state = { screen:'hub', categoryId:null, treeId:null, nodeId:null, step:1 };
       }
@@ -309,6 +310,7 @@ function attachEvents(){
       else if(nav === 'direct'){
         state = { screen:'tree-outcome', categoryId:state.categoryId, treeId:null, nodeId:el.dataset.id, step:1 };
       }
+      state.sport = keepSport;
       render();
     });
   });
