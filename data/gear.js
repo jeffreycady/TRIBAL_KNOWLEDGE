@@ -2,7 +2,7 @@
    Every outcome cites a source. Keep ids stable when editing.
    To suggest a change, open contribute.html. */
 
-const GEAR_IDS = new Set(['out_blue_bag_how','out_blue_bag_where','out_water_treat','out_filter_slow','out_catholes','out_waste_bag','gs_root','gear-sanitation','out_lost','out_cold','out_fuel_plan','out_fuel_ultra','out_pacing_early','out_exit_plan','gl_root','gc_root','gf_root','gp_root','gx_root']);
+const GEAR_IDS = new Set(['out_blue_bag_how','out_blue_bag_where','out_water_treat','out_filter_sawyer','out_filter_platypus','out_filter_general','out_catholes','out_waste_bag','gs_root','gear-sanitation','out_lost','out_cold','out_fuel_plan','out_fuel_ultra','out_pacing_early','out_exit_plan','gl_root','gc_root','gf_root','gp_root','gx_root']);
 
 Object.assign(OUTCOMES, {
   out_fuel_ultra:{
@@ -144,21 +144,51 @@ Object.assign(OUTCOMES, {
     action:"If the water is cloudy, filter it first, then treat it. If you rely on a filter alone, it won't stop viruses. If you use a chemical, follow the label exactly, including the wait time. For dosing and warnings on chemical treatments, see the CDC travel guidance and the product label.",
     source:{title:"Backcountry Water Treatment", host:"Centers for Disease Control and Prevention (CDC)", url:"https://www.cdc.gov/healthywater/pdf/drinking/Backcountry_Water_Treatment-508.pdf"}
   },
-  out_filter_slow:{
-    severity:'low', band:'Clean it and backflush', title:"My water filter is slow: clean it by backflushing",
-    body:"A slow filter is usually clogged with sediment inside the filter fibers. Pushing clean water backward through the filter, against the normal flow, pushes the sediment out. Sawyer says the key is to be forceful.",
+  out_filter_sawyer:{
+    severity:'low', band:'Clean it and backflush', title:"Sawyer filter is slow: backflush until it runs clear",
+    body:"Water flows through a filter by passing through thousands of tiny hollow fibers. Over time, dirt builds up inside them and the flow slows. Backflushing means pushing clean water backward through the filter, the opposite way water normally flows, to push the dirt out. Keep backflushing until the water coming out the dirty end runs clear. Sawyer recommends backflushing when the flow slows down.",
     steps:[
-      "Get clean water. Use water you have already treated, and fill a cleaning plunger with it. If you don't have a plunger, use a cleaning coupling and an empty plastic bottle.",
-      "Find the clean end of the filter. That is the end you drink from. Water normally flows in the dirty end and out the clean end.",
-      "Press the plunger onto the clean end of the filter.",
-      "Push hard to send clean water backward through the filter and out the dirty end.",
-      "Repeat the push until the water comes out clear and flows easily.",
-      "If it is still slow, soak the filter in hot water, no hotter than you can comfortably keep your finger in, for 2 hours. Then backflush again.",
-      "If your water is mineral-rich, soak the filter in vinegar for 30 minutes, then backflush with hot water."
+      "Get the Sawyer syringe and some clean water. Use water you have already treated.",
+      "Fill the syringe with clean water.",
+      "Attach the syringe to the clean end of the filter. The clean end is the end you drink from.",
+      "Push the plunger firmly. The water goes backward through the filter and comes out the dirty end. Aim the dirty end at the ground, away from any stream or lake.",
+      "Refill the syringe and push again. Keep going until the water coming out runs clear and flows easily.",
+      "If it is still slow, soak the filter in hot water, no hotter than you can comfortably keep your finger in, for 2 hours. Then backflush again until it runs clear.",
+      "If your water is mineral-rich, soak the filter in vinegar for 30 minutes, then backflush with hot water until it runs clear."
     ],
-    diagram:'<svg viewBox="0 0 440 170" role="img" aria-label="Backflush diagram: push clean water into the clean end of the filter, opposite the normal flow"><defs><marker id="ah" markerWidth="8" markerHeight="8" refX="6" refY="4" orient="auto"><path d="M0,0 L8,4 L0,8 z" fill="currentColor"/></marker></defs><rect x="30" y="50" width="70" height="40" rx="4" fill="none" stroke="currentColor" stroke-width="2"/><text x="65" y="75" text-anchor="middle" font-size="12" fill="currentColor">Plunger</text><text x="65" y="110" text-anchor="middle" font-size="12" fill="currentColor">Clean water</text><rect x="150" y="40" width="120" height="60" rx="6" fill="none" stroke="currentColor" stroke-width="2"/><text x="210" y="75" text-anchor="middle" font-size="13" fill="currentColor">Filter</text><text x="330" y="75" text-anchor="middle" font-size="12" fill="currentColor">Dirty end</text><line x1="104" y1="70" x2="146" y2="70" stroke="currentColor" stroke-width="2.5" marker-end="url(#ah)"/><text x="125" y="62" text-anchor="middle" font-size="11" fill="currentColor">Push</text><line x1="300" y1="130" x2="160" y2="130" stroke="currentColor" stroke-width="2" stroke-dasharray="5 4" marker-end="url(#ah)"/><text x="230" y="152" text-anchor="middle" font-size="11" fill="currentColor">Normal flow: dirty in, clean out</text></svg>',
-    action:"Backflush with clean water, forcefully, until the water runs clear. If it is still slow, soak the filter in warm water and backflush again.",
+    diagram:'<svg viewBox="0 0 440 170" role="img" aria-label="Backflush diagram: push clean water into the clean end of the filter, opposite the normal flow"><defs><marker id="ah" markerWidth="8" markerHeight="8" refX="6" refY="4" orient="auto"><path d="M0,0 L8,4 L0,8 z" fill="currentColor"/></marker></defs><rect x="30" y="50" width="70" height="40" rx="4" fill="none" stroke="currentColor" stroke-width="2"/><text x="65" y="75" text-anchor="middle" font-size="12" fill="currentColor">Syringe or bottle</text><text x="65" y="110" text-anchor="middle" font-size="12" fill="currentColor">Clean water</text><rect x="150" y="40" width="120" height="60" rx="6" fill="none" stroke="currentColor" stroke-width="2"/><text x="210" y="75" text-anchor="middle" font-size="13" fill="currentColor">Filter</text><text x="330" y="75" text-anchor="middle" font-size="12" fill="currentColor">Dirty end</text><line x1="104" y1="70" x2="146" y2="70" stroke="currentColor" stroke-width="2.5" marker-end="url(#ah)"/><text x="125" y="62" text-anchor="middle" font-size="11" fill="currentColor">Push</text><line x1="300" y1="130" x2="160" y2="130" stroke="currentColor" stroke-width="2" stroke-dasharray="5 4" marker-end="url(#ah)"/><text x="230" y="152" text-anchor="middle" font-size="11" fill="currentColor">Normal flow: dirty in, clean out</text></svg>',
+    action:"Fill the Sawyer syringe with clean water, attach it to the clean end, and push. Keep backflushing until the water runs clear.",
     source:{title:"5 Sawyer Squeeze Hacks for Hikers", host:"Sawyer (manufacturer blog)", url:"https://www.sawyer.com/blog/5-sawyer-squeeze-hacks-for-hikers"}
+  },
+  out_filter_platypus:{
+    severity:'low', band:'Clean it and backflush', title:"Platypus filter is slow: backflush until it runs clear",
+    body:"Water flows through a filter by passing through thousands of tiny hollow fibers. Over time, dirt builds up inside them and the flow slows. Platypus says clean water passed in the clean side and out the dirty side rinses the particles out of the fibers. Keep backflushing until the water runs clear. Platypus recommends backflushing after every 10 liters you filter.",
+    steps:[
+      "Get a clean bottle and some clean water. Use water you have already treated.",
+      "Fill the bottle with clean water.",
+      "Attach the bottle to the clean end of the filter, using the fitting that came with your filter. Your Platypus instructions show which fitting to use.",
+      "Squeeze the bottle to push the water backward through the filter and out the dirty end. Do this away from any stream or lake.",
+      "Refill the bottle and keep going until the water coming out runs clear and flows easily.",
+      "If it is still slow, check your Platypus instructions. You can also call Cascade Designs at 1-800-531-9531."
+    ],
+    diagram:'<svg viewBox="0 0 440 170" role="img" aria-label="Backflush diagram: push clean water into the clean end of the filter, opposite the normal flow"><defs><marker id="ah" markerWidth="8" markerHeight="8" refX="6" refY="4" orient="auto"><path d="M0,0 L8,4 L0,8 z" fill="currentColor"/></marker></defs><rect x="30" y="50" width="70" height="40" rx="4" fill="none" stroke="currentColor" stroke-width="2"/><text x="65" y="75" text-anchor="middle" font-size="12" fill="currentColor">Syringe or bottle</text><text x="65" y="110" text-anchor="middle" font-size="12" fill="currentColor">Clean water</text><rect x="150" y="40" width="120" height="60" rx="6" fill="none" stroke="currentColor" stroke-width="2"/><text x="210" y="75" text-anchor="middle" font-size="13" fill="currentColor">Filter</text><text x="330" y="75" text-anchor="middle" font-size="12" fill="currentColor">Dirty end</text><line x1="104" y1="70" x2="146" y2="70" stroke="currentColor" stroke-width="2.5" marker-end="url(#ah)"/><text x="125" y="62" text-anchor="middle" font-size="11" fill="currentColor">Push</text><line x1="300" y1="130" x2="160" y2="130" stroke="currentColor" stroke-width="2" stroke-dasharray="5 4" marker-end="url(#ah)"/><text x="230" y="152" text-anchor="middle" font-size="11" fill="currentColor">Normal flow: dirty in, clean out</text></svg>',
+    action:"Fill a clean bottle with treated water, attach it to the clean end of the filter, and squeeze. Keep going until the water runs clear.",
+    source:{title:"Platypus Frequently Asked Questions", host:"Cascade Designs (Platypus maker)", url:"https://cascadedesigns.com/pages/faq-platypus"}
+  },
+  out_filter_general:{
+    severity:'low', band:'Clean it and backflush', title:"Filter is slow: backflush until it runs clear",
+    body:"A filter slows down when dirt builds up inside its tiny hollow fibers. Backflushing means pushing clean water backward through the filter, the opposite way water normally flows, to push the dirt out. Keep backflushing until the water runs clear.",
+    steps:[
+      "Look at the brand name on your filter. If it says Sawyer or Platypus, use that page instead.",
+      "Get clean water that you have already treated, and a syringe or clean bottle that fits the clean end of the filter.",
+      "Attach it to the clean end of the filter, which is the end you drink from.",
+      "Push the water backward through the filter, out the dirty end. Do this away from any stream or lake.",
+      "Keep going until the water coming out runs clear and flows easily.",
+      "If it is still slow, check your filter's manual."
+    ],
+    diagram:'<svg viewBox="0 0 440 170" role="img" aria-label="Backflush diagram: push clean water into the clean end of the filter, opposite the normal flow"><defs><marker id="ah" markerWidth="8" markerHeight="8" refX="6" refY="4" orient="auto"><path d="M0,0 L8,4 L0,8 z" fill="currentColor"/></marker></defs><rect x="30" y="50" width="70" height="40" rx="4" fill="none" stroke="currentColor" stroke-width="2"/><text x="65" y="75" text-anchor="middle" font-size="12" fill="currentColor">Syringe or bottle</text><text x="65" y="110" text-anchor="middle" font-size="12" fill="currentColor">Clean water</text><rect x="150" y="40" width="120" height="60" rx="6" fill="none" stroke="currentColor" stroke-width="2"/><text x="210" y="75" text-anchor="middle" font-size="13" fill="currentColor">Filter</text><text x="330" y="75" text-anchor="middle" font-size="12" fill="currentColor">Dirty end</text><line x1="104" y1="70" x2="146" y2="70" stroke="currentColor" stroke-width="2.5" marker-end="url(#ah)"/><text x="125" y="62" text-anchor="middle" font-size="11" fill="currentColor">Push</text><line x1="300" y1="130" x2="160" y2="130" stroke="currentColor" stroke-width="2" stroke-dasharray="5 4" marker-end="url(#ah)"/><text x="230" y="152" text-anchor="middle" font-size="11" fill="currentColor">Normal flow: dirty in, clean out</text></svg>',
+    action:"Check the brand on your filter. Then push clean water backward through it until it runs clear.",
+    source:{title:"Sawyer Filter Backwashing Tips and Tricks", host:"Sawyer (manufacturer resource)", url:"https://www.sawyer.com/resources/backwashing-tips-and-tricks"}
   }
 });
 
@@ -166,6 +196,17 @@ NODES.gs_root.opts.push(
   {label:"How do I use a blue bag?", next:'out_blue_bag_how'},
   {label:"Which parks make me carry it out?", next:'out_blue_bag_where'},
   {label:"I need clean water", next:'out_water_treat'},
-  {label:"My water filter is slow", next:'out_filter_slow'}
+  {label:"My water filter is slow", next:'fs_root'}
 );
-const GEAR_DIRECT = ['out_blue_bag_how','out_blue_bag_where','out_water_treat','out_filter_slow','out_catholes','out_waste_bag','out_lost','out_cold','out_fuel_plan','out_fuel_ultra','out_pacing_early','out_exit_plan'];
+Object.assign(NODES, {
+  fs_root:{
+    text:"Which water filter do you have?",
+    opts:[
+      {label:"Sawyer", next:'out_filter_sawyer'},
+      {label:"Platypus", next:'out_filter_platypus'},
+      {label:"I'm not sure", next:'out_filter_general'}
+    ]
+  }
+});
+
+const GEAR_DIRECT = ['out_blue_bag_how','out_blue_bag_where','out_water_treat','out_filter_sawyer','out_filter_platypus','out_filter_general','out_catholes','out_waste_bag','out_lost','out_cold','out_fuel_plan','out_fuel_ultra','out_pacing_early','out_exit_plan'];
