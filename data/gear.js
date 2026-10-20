@@ -95,12 +95,28 @@ Object.assign(OUTCOMES, {
   out_catholes:{
     severity:'low', band:'Dig it right', title:"Going to the bathroom on the trail: the cat hole",
     body:"Leave No Trace guidance is to dig a cat hole 6 to 8 inches deep and 4 to 6 inches wide, at least 200 feet (about 70 to 80 adult paces) from water, trails, and camp. Cover it with natural material when you finish. Bury toilet paper deep in the hole or pack it out. Menstrual products and wipes should be packed out.",
+    steps:[
+      "Carry a small trowel and hand sanitizer.",
+      "Walk at least 200 feet (about 70 to 80 adult paces) from water, trails, and camp. Avoid sandy washes and low spots where runoff collects.",
+      "Dig a hole 6 to 8 inches deep and 4 to 6 inches wide.",
+      "Go in the hole.",
+      "Put toilet paper in the hole and cover it with soil. Pack out toilet paper if you don't bury it.",
+      "Cover the hole with natural material when you finish.",
+      "Pack out menstrual products and wipes. Clean your hands with sanitizer."
+    ],
     action:"Carry a small trowel and hand sanitizer that doesn't need rinsing. Walk at least 200 feet away from water, trails, and camp, and avoid sandy washes and low spots where runoff collects. Dig the hole, go, cover it, and sanitize your hands. Pack out what you don't bury.",
     source:{title:"Principle 3: Dispose of Waste Properly", host:"Leave No Trace Center for Outdoor Ethics", url:"https://lnt.org/learn/principle-3"}
   },
   out_waste_bag:{
     severity:'mid', band:'Check the rules first', title:"I need to poop in the woods, and I may have to carry it out",
     body:"Some places require you to pack out solid human waste. Zion National Park requires carrying it out from all canyons, including the Narrows, and offers disposal bags at its bookstore and through local outfitters. Leave No Trace also notes that land managers may require pack-out in fragile settings, such as narrow canyons.",
+    steps:[
+      "Check the rules for the park or area before you go, including whether you have to carry waste out.",
+      "Get the bags before you leave. Ask the permit office or bookstore where to buy them.",
+      "Carry one bag per person per night when the area requires it.",
+      "Carry out all solid human waste, toilet paper, and feminine hygiene products.",
+      "Dispose of the bag only where the land manager says to."
+    ],
     action:"Check the land manager's rules before you go, including any bag or permit requirement. Carry a pack-out waste bag sized for your trip, and carry out used toilet paper and hygiene products. Dispose of the bag only where the land manager says to.",
     source:{title:"Zion National Park: Carry Out Solid Human Waste (park staff statements)", host:"National Parks Traveler (2025)", url:"https://www.nationalparkstraveler.org/node/20195"}
   }
@@ -150,6 +166,13 @@ Object.assign(OUTCOMES, {
   out_water_treat:{
     severity:'low', band:'Treat before you drink', title:"Treating water: boil, filter, or disinfect",
     body:"The CDC says boiling is the most reliable method: boil for 1 minute, or 3 minutes above 6,500 feet. A filter rated 0.3 micron or smaller stops bacteria, and a cyst-certified filter also stops Giardia and Cryptosporidium. Filters do not remove viruses. Chlorine and iodine are only somewhat effective against Giardia and are not effective against Cryptosporidium. Chlorine dioxide is effective against Giardia. UV works only in clear water.",
+    steps:[
+      "If the water is cloudy, filter it first.",
+      "To boil, bring water to a rolling boil. Keep it boiling for 1 minute, or 3 minutes above 6,500 feet.",
+      "To filter, use a filter rated 0.3 micron or smaller. Choose a cyst-certified filter if you need to stop Giardia and Cryptosporidium.",
+      "To use a chemical, follow the product label exactly, including the wait time.",
+      "Remember that filters do not remove viruses. Boiling is the most reliable method."
+    ],
     action:"If the water is cloudy, filter it first, then treat it. If you rely on a filter alone, it won't stop viruses. If you use a chemical, follow the label exactly, including the wait time. For dosing and warnings on chemical treatments, see the CDC travel guidance and the product label.",
     source:{title:"Backcountry Water Treatment", host:"Centers for Disease Control and Prevention (CDC)", url:"https://www.cdc.gov/healthywater/pdf/drinking/Backcountry_Water_Treatment-508.pdf"}
   },

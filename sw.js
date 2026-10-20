@@ -5,7 +5,7 @@
    Bump CACHE_VERSION whenever index.html or any shell file changes so
    returning users pick up the new content. */
 
-const CACHE_VERSION = 'tk-v38';
+const CACHE_VERSION = 'tk-v39';
 const SHELL_CACHE = `${CACHE_VERSION}-shell`;
 const RUNTIME_CACHE = `${CACHE_VERSION}-runtime`;
 const NETWORK_TIMEOUT_MS = 3000;
