@@ -123,9 +123,18 @@ DECISION_TREES.push(
 Object.assign(OUTCOMES, {
   out_blue_bag_how:{
     severity:'low', band:'Pack it out', title:"How to use a pack-out (blue) bag",
-    body:"A pack-out bag is a landfill-safe toilet bag system. The National Park Service names Wag Bag and Restop as examples. Guadalupe Mountains requires one per person per night for overnight wilderness permits, and the park store at Pine Springs Visitor Center sells them.",
-    action:"Carry one bag per person per night when the area requires it, and read the instructions on the bag before you leave. Use it away from water, trails, and camp. Put toilet paper and hygiene products in the bag too, seal it, and carry it out. Dispose of it only where the land manager says to.",
-    source:{title:"Guadalupe Mountains National Park: Wilderness Human Waste", host:"National Park Service (last updated 2023)", url:"https://home.nps.gov/thingstodo/gumo_human_waste_wilderness.htm"}
+    body:"A pack-out bag, often called a WAG bag, is a toilet bag system you use in place of a cathole. Each bag has an outer bag and an inner pouch. The inner pouch holds a solidifying agent that turns the waste into a solid, and a small packet of toilet paper and hand sanitizer. Guadalupe Mountains requires one bag per person per night for overnight wilderness permits, and the park store sells them.",
+    steps:[
+      "Open the outer bag and pull out the inner liner. Take out the hand sanitizer and toilet paper.",
+      "Sit over the bag and hold the plastic bag around your hips so it catches the waste.",
+      "When you're done, use the cinch loop on the inner pouch to seal and tie it off.",
+      "Run your fingers along the zip seal on the outer bag to close it.",
+      "Check that the seal has no openings or leaks before you store the bag.",
+      "On a multi-day trip, keep the used bag in the bottom of your pack, away from food.",
+      "Carry it out. Dispose of it only as the land manager says. Where regular trash is allowed, the bag can go in a normal trash can once you're home. Some areas require a specific disposal site, so check before you leave."
+    ],
+    action:"Open the bag, use it over the plastic liner, seal the inner pouch, zip the outer bag, check for leaks, and carry it out. Ask the park where to dispose of it.",
+    source:{title:"Tips for using a WAG bag: what to know before you go", host:"The Dyrt (camping guide)", url:"https://thedyrt.com/magazine/gear/wag-bag-camping-waste/"}
   },
   out_blue_bag_where:{
     severity:'low', band:'Check before you go', title:"Which parks require you to carry waste out",
