@@ -7,7 +7,7 @@ const vm = require('vm');
 const path = require('path');
 const root = path.join(__dirname, '..');
 
-const src = ['data/physical.js', 'data/mental.js', 'data/gear.js', 'data/training.js', 'data/glossary.js', 'app.js']
+const src = ['data/physical.js', 'data/mental.js', 'data/gear.js', 'data/training.js', 'data/glossary.js', 'data/sports.js', 'app.js']
   .map(f => fs.readFileSync(path.join(root, f), 'utf8')).join('\n;\n')
   .replace(/^render\(\);$/m, '');
 const stub = { getElementById: () => ({ innerHTML: '' }), querySelectorAll: () => [] };

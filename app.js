@@ -59,6 +59,14 @@ function renderHub(){
       <div class="tk-eyebrow">TRIBAL KNOWLEDGE</div>
       <h1>Problems endurance athletes actually run into</h1>
       <p>The knowledge that keeps people safe in this sport already exists. It's just scattered across forums, buried in a coach's head, or something people only learn by getting hurt once. This puts it in one place, sourced and organized.</p>
+      <div class="sport-pick">
+        <label for="sport-select">Sport</label>
+        <select id="sport-select">
+          ${SPORTS.map(sp => sp.status === 'live'
+            ? `<option value="${sp.id}" ${sp.id === state.sport ? 'selected' : ''}>${escapeHtml(sp.name)}</option>`
+            : `<option value="${sp.id}" disabled>${escapeHtml(sp.name)} (coming soon)</option>`).join('')}
+        </select>
+      </div>
       ${renderDisclaimer()}
     </div>
   </div>
@@ -108,8 +116,8 @@ function renderGlossary(){
 
 function renderCategory(){
   const cat = CATEGORIES.find(c => c.id === state.categoryId);
-  const trees = DECISION_TREES.filter(t => t.category === cat.id);
-  const direct = (cat.direct || []).filter(id => OUTCOMES[id]);
+  const trees = DECISION_TREES.filter(t => t.category === cat.id && appliesTo(t, state.sport));
+  const direct = (cat.direct || []).filter(id => OUTCOMES[id] && appliesTo(OUTCOMES[id], state.sport));
   return `
   <div class="tk-hero" style="padding:32px 0 28px;">
     <div class="wrap">
@@ -246,6 +254,12 @@ async function shareOutcome(id){
 }
 
 function attachEvents(){
+  const sportSel = document.getElementById('sport-select');
+  if(sportSel) sportSel.addEventListener('change', () => {
+    state.sport = sportSel.value;
+    saveSport(state.sport);
+    render();
+  });
   const glossQ = document.getElementById('gloss-q');
   if(glossQ) glossQ.addEventListener('input', () => {
     document.getElementById('gloss-list').innerHTML = glossaryList(glossQ.value);
@@ -292,6 +306,7 @@ function render(){
   attachEvents();
 }
 
+state.sport = loadSport();
 render();
 
 if('serviceWorker' in navigator){
