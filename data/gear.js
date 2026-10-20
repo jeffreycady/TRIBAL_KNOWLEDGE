@@ -2,7 +2,7 @@
    Every outcome cites a source. Keep ids stable when editing.
    To suggest a change, open contribute.html. */
 
-const GEAR_IDS = new Set(['out_catholes','out_waste_bag','gs_root','gear-sanitation','out_lost','out_cold','out_fuel_plan','out_fuel_ultra','out_pacing_early','out_exit_plan','gl_root','gc_root','gf_root','gp_root','gx_root']);
+const GEAR_IDS = new Set(['out_blue_bag_how','out_blue_bag_where','out_water_treat','out_filter_slow','out_catholes','out_waste_bag','gs_root','gear-sanitation','out_lost','out_cold','out_fuel_plan','out_fuel_ultra','out_pacing_early','out_exit_plan','gl_root','gc_root','gf_root','gp_root','gx_root']);
 
 Object.assign(OUTCOMES, {
   out_fuel_ultra:{
@@ -93,14 +93,12 @@ DECISION_TREES.push(
 
 Object.assign(OUTCOMES, {
   out_catholes:{
-    sports:['ultra','trail-run','hiking','mtb','gravel','bikepacking','trekking','sky','skimo','mountaineering','climbing','snowshoe'],
     severity:'low', band:'Dig it right', title:"Going to the bathroom on the trail: the cat hole",
     body:"Leave No Trace guidance is to dig a cat hole 6 to 8 inches deep and 4 to 6 inches wide, at least 200 feet (about 70 to 80 adult paces) from water, trails, and camp. Cover it with natural material when you finish. Bury toilet paper deep in the hole or pack it out. Menstrual products and wipes should be packed out.",
     action:"Carry a small trowel and hand sanitizer that doesn't need rinsing. Walk at least 200 feet away from water, trails, and camp, and avoid sandy washes and low spots where runoff collects. Dig the hole, go, cover it, and sanitize your hands. Pack out what you don't bury.",
     source:{title:"Principle 3: Dispose of Waste Properly", host:"Leave No Trace Center for Outdoor Ethics", url:"https://lnt.org/learn/principle-3"}
   },
   out_waste_bag:{
-    sports:['ultra','trail-run','hiking','mtb','gravel','bikepacking','trekking','sky','skimo','mountaineering','climbing','snowshoe'],
     severity:'mid', band:'Check the rules first', title:"Some areas require you to carry your waste out",
     body:"Some places require you to pack out solid human waste. Zion National Park requires carrying it out from all canyons, including the Narrows, and offers disposal bags at its bookstore and through local outfitters. Leave No Trace also notes that land managers may require pack-out in fragile settings, such as narrow canyons.",
     action:"Check the land manager's rules before you go, including any bag or permit requirement. Carry a pack-out waste bag sized for your trip, and carry out used toilet paper and hygiene products. Dispose of the bag only where the land manager says to.",
@@ -119,7 +117,45 @@ Object.assign(NODES, {
 });
 
 DECISION_TREES.push(
-  { id:'gear-sanitation', sports:['ultra','trail-run','hiking','mtb','gravel','bikepacking','trekking','sky','skimo','mountaineering','climbing','snowshoe'], category:'gear', title:"Bathroom and waste in the backcountry", blurb:"Where to go, how to dig, and when you have to carry it out.", root:'gs_root' }
+  { id:'gear-sanitation', category:'gear', title:"Sanitation: bathroom, waste, and water", blurb:"Where to go, how to pack out waste, and how to treat water and keep a filter flowing.", root:'gs_root' }
 );
 
-const GEAR_DIRECT = ['out_catholes','out_waste_bag','out_lost','out_cold','out_fuel_plan','out_fuel_ultra','out_pacing_early','out_exit_plan'];
+Object.assign(OUTCOMES, {
+  out_blue_bag_how:{
+    severity:'low', band:'Pack it out', title:"How to use a pack-out (blue) bag",
+    body:"A pack-out bag is a landfill-safe toilet bag system. The National Park Service names Wag Bag and Restop as examples. Guadalupe Mountains requires one per person per night for overnight wilderness permits, and the park store at Pine Springs Visitor Center sells them.",
+    action:"Carry one bag per person per night when the area requires it, and read the instructions on the bag before you leave. Use it away from water, trails, and camp. Put toilet paper and hygiene products in the bag too, seal it, and carry it out. Dispose of it only where the land manager says to.",
+    source:{title:"Guadalupe Mountains National Park: Wilderness Human Waste", host:"National Park Service (last updated 2023)", url:"https://home.nps.gov/thingstodo/gumo_human_waste_wilderness.htm"}
+  },
+  out_blue_bag_where:{
+    severity:'low', band:'Check before you go', title:"Which parks require you to carry waste out",
+    body:"More parks and wilderness areas now require you to carry out solid human waste. Zion requires it in all canyons, including the Narrows. Guadalupe Mountains requires a toilet bag system for overnight wilderness permits. Rio Grande Wild and Scenic River requires commercial and private river parties to pack out waste on overnight trips. Rules change, so check each land manager's current rules before you go.",
+    action:"Look up the park or wilderness before you leave. Ask the permit office or bookstore about bags. The Rio Grande page was last updated in 2013, and one Guadalupe page still has older burial advice, so confirm both with the park before relying on them.",
+    source:{title:"Zion National Park: Carry Out Solid Human Waste (park staff statements)", host:"National Parks Traveler (2025)", url:"https://www.nationalparkstraveler.org/node/20195"},
+    links:[
+      {name:"Guadalupe Mountains National Park", url:"https://home.nps.gov/thingstodo/gumo_human_waste_wilderness.htm", note:"overnight wilderness permits"},
+      {name:"Rio Grande Wild and Scenic River", url:"https://www.nps.gov/rigr/planyourvisit/humanwaste.htm", note:"commercial and private river parties on overnight trips"},
+      {name:"Zion National Park (via National Parks Traveler)", url:"https://www.nationalparkstraveler.org/node/20195", note:"all canyons, including the Narrows"}
+    ]
+  },
+  out_water_treat:{
+    severity:'low', band:'Treat before you drink', title:"Treating water: boil, filter, or disinfect",
+    body:"The CDC says boiling is the most reliable method: boil for 1 minute, or 3 minutes above 6,500 feet. A filter rated 0.3 micron or smaller stops bacteria, and a cyst-certified filter also stops Giardia and Cryptosporidium. Filters do not remove viruses. Chlorine and iodine are only somewhat effective against Giardia and are not effective against Cryptosporidium. Chlorine dioxide is effective against Giardia. UV works only in clear water.",
+    action:"If the water is cloudy, filter it first, then treat it. If you rely on a filter alone, it won't stop viruses. If you use a chemical, follow the label exactly, including the wait time. For dosing and warnings on chemical treatments, see the CDC travel guidance and the product label.",
+    source:{title:"Backcountry Water Treatment", host:"Centers for Disease Control and Prevention (CDC)", url:"https://www.cdc.gov/healthywater/pdf/drinking/Backcountry_Water_Treatment-508.pdf"}
+  },
+  out_filter_slow:{
+    severity:'low', band:'Clean it and backflush', title:"Filter flow is slow",
+    body:"A slow flow usually means the filter is clogged. The manufacturer says a forceful backflush, at a higher pressure than normal use, can restore most of the flow: up to 98.5 percent in its testing. A heavily clogged filter can be soaked in warm water to loosen the fibers. For mineral-rich water, the manufacturer suggests a vinegar soak.",
+    action:"Backflush with clean water, forcefully, following the manufacturer's steps. If the flow is still slow, soak the filter in warm water and try again. If it never recovers, check the manufacturer's guidance on replacement.",
+    source:{title:"Sawyer Filter Backwashing Tips and Tricks", host:"Sawyer (manufacturer resource)", url:"https://www.sawyer.com/resources/backwashing-tips-and-tricks"}
+  }
+});
+
+NODES.gs_root.opts.push(
+  {label:"How do I use a pack-out (blue) bag?", next:'out_blue_bag_how'},
+  {label:"Which parks or areas require me to carry waste out?", next:'out_blue_bag_where'},
+  {label:"I need to treat water before drinking it, or I'm not sure it's safe", next:'out_water_treat'},
+  {label:"My water filter is running slowly", next:'out_filter_slow'}
+);
+const GEAR_DIRECT = ['out_blue_bag_how','out_blue_bag_where','out_water_treat','out_filter_slow','out_catholes','out_waste_bag','out_lost','out_cold','out_fuel_plan','out_fuel_ultra','out_pacing_early','out_exit_plan'];

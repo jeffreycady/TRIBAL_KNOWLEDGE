@@ -223,6 +223,7 @@ function renderOutcome(){
         </div>` : ''}
         ${outcome.prevention ? `<h5>Prevention</h5><p>${escapeHtml(outcome.prevention)}</p>` : ''}
         <div class="source-line">Source: <a href="${escapeHtml(outcome.source.url)}" target="_blank" rel="noopener">${escapeHtml(outcome.source.title)}</a> &mdash; ${escapeHtml(outcome.source.host)}</div>
+        ${outcome.links ? `<div class="source-line"><strong>Where this applies:</strong><ul class="link-list">${outcome.links.map(l => `<li><a href="${escapeHtml(l.url)}" target="_blank" rel="noopener">${escapeHtml(l.name)}</a>${l.note ? ' &mdash; ' + escapeHtml(l.note) : ''}</li>`).join('')}</ul></div>` : ''}
       </div>
     </div>
     <div class="share-row">

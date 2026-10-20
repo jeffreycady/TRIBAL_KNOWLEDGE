@@ -202,3 +202,5 @@ h1,h2,h3,h4,h5{font-family:var(--tk-display);text-transform:uppercase;letter-spa
 .gloss-sports{margin-top:6px!important;font-size:13px!important;color:var(--dim);}
 .gloss-scope{color:var(--dim);font-size:14px;margin:0 0 12px;}
 .gloss-count{color:var(--dim);font-size:13px;margin:0 0 4px;font-family:var(--tk-mono);text-transform:uppercase;letter-spacing:.05em;}
+.link-list{margin:6px 0 0 18px;padding:0;}
+.link-list li{margin:4px 0;}
