@@ -5,7 +5,7 @@
    Bump CACHE_VERSION whenever index.html or any shell file changes so
    returning users pick up the new content. */
 
-const CACHE_VERSION = 'tk-v7';
+const CACHE_VERSION = 'tk-v8';
 const SHELL_CACHE = `${CACHE_VERSION}-shell`;
 const RUNTIME_CACHE = `${CACHE_VERSION}-runtime`;
 
@@ -49,44 +49,41 @@ self.addEventListener('fetch', (event) => {
   const { request } = event;
   if (request.method !== 'GET') return;
 
-  // Content files: network first, so edits reach users; cache is the offline fallback.
-  const reqUrl = new URL(request.url);
-  if (reqUrl.origin === self.location.origin && reqUrl.pathname.includes('/data/')) {
+  const url = new URL(request.url);
+  const isSameOrigin = url.origin === self.location.origin;
+  const isFont = url.hostname === 'fonts.googleapis.com' || url.hostname === 'fonts.gstatic.com';
+  if (!isSameOrigin && !isFont) return;
+
+  // The app's own files (pages, scripts, styles, content): network first, so
+  // every online visit gets the latest version. The cache is the offline fallback.
+  if (isSameOrigin) {
     event.respondWith(
       fetch(request).then((res) => {
-        if (res && res.ok) caches.open(RUNTIME_CACHE).then((c) => c.put(request, res.clone()));
+        if (res && res.ok) {
+          const copy = res.clone();
+          caches.open(RUNTIME_CACHE).then((c) => c.put(request, copy));
+        }
         return res;
-      }).catch(() => caches.match(request, { ignoreSearch: true }))
+      }).catch(() =>
+        caches.match(request, { ignoreSearch: true }).then((cached) =>
+          cached || (request.mode === 'navigate' ? caches.match('./index.html', { ignoreSearch: true }) : Response.error())
+        )
+      )
     );
     return;
   }
 
-  const url = new URL(request.url);
-  const isFont = url.hostname === 'fonts.googleapis.com' || url.hostname === 'fonts.gstatic.com';
-  const isSameOrigin = url.origin === self.location.origin;
-
-  if (!isSameOrigin && !isFont) return;
-
+  // Fonts: cache first (they rarely change). Opaque responses are cached too.
   event.respondWith(
     caches.match(request, { ignoreSearch: true }).then((cached) => {
       if (cached) return cached;
-
       return fetch(request).then((response) => {
-        // Cache successful same-origin responses and font responses
-        // (fonts may come back opaque, so accept status 0 too).
         if (response && (response.ok || response.type === 'opaque')) {
           const copy = response.clone();
-          // caches.match() searches every cache, so runtime entries are found too.
           caches.open(RUNTIME_CACHE).then((cache) => cache.put(request, copy));
         }
         return response;
-      }).catch(() => {
-        // Offline and not cached: for page navigations, serve the app shell.
-        if (request.mode === 'navigate') {
-          return caches.match('./index.html', { ignoreSearch: true });
-        }
-        return Response.error();
-      });
+      }).catch(() => Response.error());
     })
   );
 });
