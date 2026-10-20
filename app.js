@@ -40,12 +40,26 @@ function footer(){
 
 function glossaryList(q){
   const needle = (q || '').trim().toLowerCase();
-  const items = GLOSSARY.filter(g => appliesTo(g, state.sport) && (!needle ||
-    g.term.toLowerCase().includes(needle) ||
-    g.aliases.some(a => a.toLowerCase().includes(needle)) ||
-    g.def.toLowerCase().includes(needle)));
+  // Rank matches: term starts with the query, then term contains it, then an alias, then the meaning.
+  const score = (g) => {
+    if(!needle) return 0;
+    const term = g.term.toLowerCase();
+    if(term.startsWith(needle)) return 0;
+    if(term.split(/[\s()\/-]+/).some(w => w.startsWith(needle))) return 1;
+    if(term.includes(needle)) return 2;
+    if(g.aliases.some(a => a.toLowerCase().includes(needle))) return 3;
+    if(g.def.toLowerCase().includes(needle)) return 4;
+    return -1;
+  };
+  const items = GLOSSARY
+    .filter(g => appliesTo(g, state.sport))
+    .map(g => ({ g, s: score(g) }))
+    .filter(x => x.s >= 0)
+    .sort((a, b) => a.s - b.s || a.g.term.localeCompare(b.g.term))
+    .map(x => x.g);
   if(!items.length) return `<p class="gloss-empty">No match. Try a shorter word, or <a href="contribute.html">suggest the term</a>.</p>`;
-  return items.map(g => `
+  const count = `<p class="gloss-count">${items.length} ${items.length === 1 ? 'term' : 'terms'}${needle ? ' matching &ldquo;' + escapeHtml(q.trim()) + '&rdquo;' : ''}</p>`;
+  return count + items.map(g => `
     <div class="gloss-item">
       <h4>${escapeHtml(g.term)}${g.kind === 'community' ? ' <span class="gloss-kind">Community usage</span>' : ''}</h4>
       <p>${escapeHtml(g.def)}</p>
