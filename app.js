@@ -31,7 +31,7 @@ function crisisLine(cat){
 }
 
 function footer(){
-  return `<div class="tk-footer">Tribal Knowledge · © 2026 <a href="https://jcady.org" target="_blank" rel="noopener">Jeff Cady</a> · works offline, nothing you enter is stored or sent anywhere · <a href="contribute.html">Suggest an update</a></div>`;
+  return `<div class="tk-footer">Tribal Knowledge · © 2026 <a href="https://jcady.org" target="_blank" rel="noopener">JCady LLC</a> · works offline, nothing you enter is stored or sent anywhere · <a href="contribute.html">Suggest an update</a></div>`;
 }
 
 function renderHub(){

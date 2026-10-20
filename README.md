@@ -80,4 +80,4 @@ This is general information, not medical advice, and it isn't a diagnosis. Anyth
 
 ## License
 
-Tribal Knowledge © 2026 Jeff Cady. All rights reserved for the content and code. Sources cited in the content belong to their authors. Ask before reusing the content elsewhere.
+Tribal Knowledge © 2026 JCady LLC. All rights reserved for the content and code. Sources cited in the content belong to their authors. Ask before reusing the content elsewhere.
