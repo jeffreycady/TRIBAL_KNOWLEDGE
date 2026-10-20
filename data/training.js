@@ -2,7 +2,7 @@
    Every outcome cites a source. Keep ids stable when editing.
    To suggest a change, open contribute.html. */
 
-const TRAIN_IDS = new Set(['out_plateau_vary','out_taper','out_taper_feelings','out_sleep','out_reds_suspected','out_reds_urgent','tp_root','tt_root','tr_root']);
+const TRAIN_IDS = new Set(['out_plateau_vary','out_taper','out_taper_feelings','out_strength_prevent','ts_root','out_sleep','out_reds_suspected','out_reds_urgent','tp_root','tt_root','tr_root']);
 
 Object.assign(OUTCOMES, {
   out_plateau_vary:{
@@ -27,6 +27,12 @@ Object.assign(OUTCOMES, {
 });
 
 Object.assign(OUTCOMES, {
+  out_strength_prevent:{
+    severity:'low', title:"Strength work: fewer injuries as you build up",
+    body:"A 2018 systematic review and meta-analysis (Lauersen, Andersen and Andersen, BJSM) pooled six randomized trials with about 7,700 participants and found that strength training reduced sports injuries by about two-thirds. The effective programs included hamstring work and full-season strength, balance, and landing exercises. Most trials were in team and youth sport rather than ultrarunning, so applying this to ultras is an extrapolation.",
+    action:"Add two short strength sessions a week focused on legs, hips, and core. Include hamstring exercises and single-leg balance or landing drills. Start light and build gradually, and keep sessions far enough from hard runs that you can recover.",
+    source:{title:"Strength training as superior, dose-dependent and safe prevention of acute and overuse sports injuries", host:"British Journal of Sports Medicine (2018)", url:"https://doi.org/10.1136/bjsports-2018-099078"}
+  },
   out_taper_feelings:{
     severity:'low', band:'Common in the last weeks', title:"Taper tantrums: restless, grumpy, or feeling a bit off",
     body:"Many athletes get irritable, restless, or anxious in the last weeks before a race, and some feel flat or like they're coming down with something. The research on this is limited. A 2023 scoping review of tapering psychology (Stone and colleagues) found that taper is studied as a stressor and that mood and fatigue are key themes, but it concluded the evidence base is small. Why it happens isn't established.",
@@ -71,6 +77,16 @@ Object.assign(NODES, {
   }
 });
 
+// Strength-for-injury-prevention tree
+NODES.ts_root = {
+  text:"What's going on?",
+  opts:[
+    {label:"I'm adding mileage or hills and want to stay healthy", next:'out_strength_prevent'},
+    {label:"I'm not sure what strength work to do", next:'out_strength_prevent'}
+  ]
+};
+DECISION_TREES.push({ id:'training-strength', category:'training', title:"Staying healthy as you build up", blurb:"Strength work is one of the best-supported ways to cut running injuries.", root:'ts_root' });
+
 // Taper-period feelings branches
 NODES.tt_root.opts.push({label:"Irritable, restless, or anxious about the race", next:'out_taper_feelings'});
 NODES.tt_root.opts.push({label:"Feeling flat, or like I'm coming down with a cold", next:'out_taper_feelings'});
@@ -86,4 +102,4 @@ DECISION_TREES.push(
   { id:'training-recovery', category:'training', title:"Run-down, tired, or sleeping badly", blurb:"Tiredness is information. Work out whether it's sleep or training load.", root:'tr_root' }
 );
 
-const TRAIN_DIRECT = ['out_taper','out_taper_feelings','out_plateau_vary','out_sleep','out_reds_suspected','out_reds_urgent'];
+const TRAIN_DIRECT = ['out_taper','out_taper_feelings','out_strength_prevent','out_plateau_vary','out_sleep','out_reds_suspected','out_reds_urgent'];
