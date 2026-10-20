@@ -74,14 +74,33 @@ function renderHub(){
             <span class="tag">${c.ready ? 'Browse &rarr;' : 'Coming soon'}</span>
           </div>
         `).join('')}
+        <div class="cat-card tone-low" data-nav="glossary">
+          <h3>Glossary</h3>
+          <p>Ultra and running words, explained. Search by term or by what it means.</p>
+          <span class="tag">Search &rarr;</span>
+        </div>
       </div>
       <div class="tk-section-sub">Know something that should be here? <a href="contribute.html">Suggest an update &rarr;</a></div>
-      <div class="gloss" id="glossary">
-        <div class="tk-section-title">Glossary</div>
-        <div class="tk-section-sub">Ultra and running words, explained. Search, or scroll.</div>
-        <input class="gloss-search" id="gloss-q" type="search" placeholder="Search, like bonk, DFL, or cutoff" aria-label="Search the glossary" autocomplete="off">
-        <div id="gloss-list" class="gloss-list">${glossaryList('')}</div>
       </div>
+    </div>
+  </div>
+  ${footer()}`;
+}
+
+function renderGlossary(){
+  return `
+  <div class="tk-hero" style="padding:32px 0 28px;">
+    <div class="wrap">
+      <button class="back-link" data-nav="hub" style="color:var(--dim);">&larr; All categories</button>
+      <div class="tk-eyebrow">REFERENCE</div>
+      <h1 style="font-size:clamp(26px,4.5vw,38px);">Glossary</h1>
+      <p style="font-size:14.5px;max-width:58ch;margin-top:10px;">Ultra and running words, explained. Search by term, or by a word in the meaning.</p>
+    </div>
+  </div>
+  <div class="tk-body">
+    <div class="wrap">
+      <input class="gloss-search" id="gloss-q" type="search" placeholder="Search, like bonk, DFL, or cutoff" aria-label="Search the glossary" autocomplete="off">
+      <div id="gloss-list" class="gloss-list">${glossaryList('')}</div>
     </div>
   </div>
   ${footer()}`;
@@ -243,6 +262,9 @@ function attachEvents(){
       else if(nav === 'category'){
         state = { screen:'category', categoryId:el.dataset.id, treeId:null, nodeId:null, step:1 };
       }
+      else if(nav === 'glossary'){
+        state = { screen:'glossary', categoryId:null, treeId:null, nodeId:null, step:1 };
+      }
       else if(nav === 'tree-start'){
         const tree = DECISION_TREES.find(t => t.id === el.dataset.id);
         state = { screen:'tree-question', categoryId:tree.category, treeId:tree.id, nodeId:tree.root, step:1 };
@@ -264,7 +286,7 @@ function attachEvents(){
 
 function render(){
   const app = document.getElementById('app');
-  const views = { hub:renderHub, category:renderCategory, 'tree-question':renderTreeQuestion, 'tree-outcome':renderOutcome };
+  const views = { hub:renderHub, glossary:renderGlossary, category:renderCategory, 'tree-question':renderTreeQuestion, 'tree-outcome':renderOutcome };
   app.innerHTML = views[state.screen]();
   window.scrollTo(0, 0);
   attachEvents();
