@@ -4,6 +4,7 @@
 
 Object.assign(OUTCOMES, {
   out_hallucinations:{
+    sports:['ultra','trail-run','sky','skimo','mountaineering'],
     severity:'mid', band:'Common in long races', title:"Seeing things that aren't there after a night without sleep",
     body:"Seeing things that aren't there, like shapes, animals, or small figures, is reported by many runners in long races, especially after a night without sleep. A 2024 study of 1,154 finishers of two French mountain ultras found that most had at least one symptom of sleep deprivation (80.1%). The authors called the high prevalence of falls and hallucinations 'particularly worrisome.' The study found that more nights spent in the race went with more sleep loss, and it didn't give an exact hallucination rate.",
     action:"Stop for a short rest if you can do it safely, eat and drink, and use your headlamp to check the trail near your feet. Tell your crew or pacer what you're seeing so they can check on you. Don't keep going alone through a technical section while you're seeing things. If what you're seeing comes with confusion, or you can't tell what's real, follow the emergency path now.",
@@ -144,7 +145,7 @@ NODES.mh_root = {
 };
 
 DECISION_TREES.push(
-  { id:'mental-hallucinations', category:'mental', title:"Seeing things during a long race or after no sleep", blurb:"Seeing things at night in an ultra is common. Confusion is not, and needs help.", root:'mh_root' },
+  { id:'mental-hallucinations', sports:['ultra','trail-run','sky','skimo','mountaineering'], category:'mental', title:"Seeing things during a long race or after no sleep", blurb:"Seeing things at night in an ultra is common. Confusion is not, and needs help.", root:'mh_root' },
   { id:'mental-pre', category:'mental', title:"Nerves before a race or big effort", blurb:"Pre-race nerves are normal. This helps you tell the useful kind from the kind that needs support.", root:'mp_root' },
   { id:'mental-mid', category:'mental', title:"Want to quit or feel low mid-race", blurb:"Start with safety. Then work out whether this is a discomfort problem, a pacing or fueling problem, or something that needs more help.", root:'mm_safety' },
   { id:'mental-motivation', category:'mental', title:"Lost motivation or dreading training", blurb:"A slump is common. Low mood that lasts, or heavy fatigue that won't lift, needs a different response.", root:'mv_root' },

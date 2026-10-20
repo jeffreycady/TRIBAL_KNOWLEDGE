@@ -1,6 +1,7 @@
 /* Sports list for the sport picker.
    status:'live' sports show content. 'soon' sports are listed but disabled.
-   Content with no `sports` field applies to ultra running only (the default).
+   Content with no `sports` field applies to every sport. Tag items that only
+   fit some sports, for example sports:['ultra','trail-run'].
    To tag content for other sports, add sports:['trail-run','ultra'] to a
    tree or outcome. */
 
@@ -26,7 +27,7 @@ const SPORTS = [
 const DEFAULT_SPORT = 'ultra';
 
 function appliesTo(item, sport){
-  const list = (item && item.sports) || [DEFAULT_SPORT];
+  const list = (item && item.sports) || SPORTS.map(x => x.id);
   return list.includes(sport);
 }
 
