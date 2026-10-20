@@ -6,8 +6,8 @@
 
 const SPORTS = [
   { id:'ultra',         name:'Ultra running',               status:'live', intro:"Races longer than a marathon, on trail or road." },
-  { id:'road-run',      name:'Road running',                status:'soon', intro:"Racing and training on pavement, from 5K to the marathon." },
-  { id:'trail-run',     name:'Trail running',               status:'soon', intro:"Running on dirt trails, from short races to long ones." },
+  { id:'road-run',      name:'Road running',                status:'live', intro:"Racing and training on pavement, from 5K to the marathon." },
+  { id:'trail-run',     name:'Trail running',               status:'live', intro:"Running on dirt trails, from short races to long ones." },
   { id:'hiking',        name:'Hiking',                      status:'soon', intro:"Walking trails for enjoyment, fitness, or distance." },
   { id:'road-bike',     name:'Road cycling',                status:'soon', intro:"Cycling on paved roads, from group rides to road races." },
   { id:'gravel',        name:'Gravel cycling',              status:'soon', intro:"Mixed-surface riding on gravel and dirt roads." },

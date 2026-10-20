@@ -2,8 +2,8 @@
    Reads the same data files as the app, so this page can't drift from it. */
 
 const REPO = 'https://github.com/jeffreycady/TRIBAL_KNOWLEDGE';
-const CATEGORY_FILES = { physical:'data/physical.js', mental:'data/mental.js', gear:'data/gear.js', training:'data/training.js' };
-const CATEGORY_NAMES = { physical:'Physical & Medical', mental:'Mental & Psychological', gear:'Gear & Logistics', training:'Training' };
+const CATEGORY_FILES = { physical:'data/physical.js', mental:'data/mental.js', gear:'data/gear.js', training:'data/training.js', sports:'data/sports-content.js' };
+const CATEGORY_NAMES = { physical:'Physical & Medical', mental:'Mental & Psychological', gear:'Gear & Logistics', training:'Training', sports:'Sport-specific' };
 
 function esc(s){
   return String(s==null?'':s).replace(/[&<>"']/g, c => ({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));
@@ -19,6 +19,7 @@ function homeCategory(id){
   if(typeof MENTAL_IDS !== 'undefined' && MENTAL_IDS.has(id)) return 'mental';
   if(typeof GEAR_IDS !== 'undefined' && GEAR_IDS.has(id)) return 'gear';
   if(typeof TRAIN_IDS !== 'undefined' && TRAIN_IDS.has(id)) return 'training';
+  if(typeof SPORT_IDS !== 'undefined' && SPORT_IDS.has(id)) return 'sports';
   return 'physical';
 }
 
