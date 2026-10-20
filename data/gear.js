@@ -2,7 +2,7 @@
    Every outcome cites a source. Keep ids stable when editing.
    To suggest a change, open contribute.html. */
 
-const GEAR_IDS = new Set(['out_sb_plan','out_sb_essentials','sb_root','start-backcountry','out_blue_bag_how','out_blue_bag_where','out_water_treat','out_filter_sawyer','out_filter_platypus','out_filter_general','out_catholes','out_waste_bag','gs_root','gear-sanitation','out_lost','out_cold','out_fuel_plan','out_fuel_ultra','out_pacing_early','out_exit_plan','gl_root','gc_root','gf_root','gp_root','gx_root']);
+const GEAR_IDS = new Set(['out_sb_run','out_sb_plan','out_sb_essentials','sb_root','start-backcountry','out_blue_bag_how','out_blue_bag_where','out_water_treat','out_filter_sawyer','out_filter_platypus','out_filter_general','out_catholes','out_waste_bag','gs_root','gear-sanitation','out_lost','out_cold','out_fuel_plan','out_fuel_ultra','out_pacing_early','out_exit_plan','gl_root','gc_root','gf_root','gp_root','gx_root']);
 
 Object.assign(OUTCOMES, {
   out_fuel_ultra:{
@@ -255,8 +255,27 @@ Object.assign(NODES, {
   }
 });
 
+Object.assign(OUTCOMES, {
+  out_sb_run:{
+    severity:'low', band:'Start here', title:"Running on a backcountry trail",
+    body:"When you run in the backcountry, cell service, water, and help can all be far away. The National Park Service's guidance for backcountry travel applies to runners as well as hikers. Plan for the worst case, and carry what you need to wait for help if you have to.",
+    steps:[
+      "Tell someone where you're going and when to expect you back.",
+      "Know how to use your map and compass or GPS before you start. Carry a paper map as a backup.",
+      "Check the weather, and plan for it to change suddenly.",
+      "Carry the Ten Essentials, including extra clothing in bright colors so rescuers can spot you.",
+      "Carry water and a way to treat it, and know where you can find water along the route.",
+      "Carry an extra day's worth of mostly no-cook, energy-rich food."
+    ],
+    action:"Tell someone your route and return time, carry the Ten Essentials, and check the weather before you start.",
+    source:{title:"The Ten Essentials", host:"U.S. National Park Service", url:"https://www.nps.gov/articles/10essentials.htm"}
+  }
+});
+
+NODES.sb_root.opts.splice(0,0,{label:"I'm going to run on a backcountry trail", next:'out_sb_run'});
+
 DECISION_TREES.push(
   { id:'start-backcountry', sports:['ultra','trail-run','hiking','mtb','gravel','bikepacking','trekking','sky','skimo','mountaineering','climbing','snowshoe'], category:'gear', title:"Start here: trails and backcountry", blurb:"The basics for planning and packing before you head out.", root:'sb_root' }
 );
 
-const GEAR_DIRECT = ['out_sb_plan','out_sb_essentials','out_blue_bag_how','out_blue_bag_where','out_water_treat','out_filter_sawyer','out_filter_platypus','out_filter_general','out_catholes','out_waste_bag','out_lost','out_cold','out_fuel_plan','out_fuel_ultra','out_pacing_early','out_exit_plan'];
+const GEAR_DIRECT = ['out_sb_run','out_sb_plan','out_sb_essentials','out_blue_bag_how','out_blue_bag_where','out_water_treat','out_filter_sawyer','out_filter_platypus','out_filter_general','out_catholes','out_waste_bag','out_lost','out_cold','out_fuel_plan','out_fuel_ultra','out_pacing_early','out_exit_plan'];
