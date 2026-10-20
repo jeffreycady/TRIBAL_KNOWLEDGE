@@ -5,14 +5,14 @@
 const REPO_URL = 'https://github.com/jeffreycady/TRIBAL_KNOWLEDGE';
 
 const CATEGORIES = [
-  { id:'physical', name:'Physical & Medical', desc:'Injuries, illness, and in-the-moment medical situations.', ready:true,
+  { id:'physical', name:'Physical & Medical', tone:'high', desc:'Injuries, illness, and in-the-moment medical situations.', ready:true,
     intro:"You don't need to know what it's called. Start with what you actually feel and where. A couple of questions gets you to the right answer.",
     direct: DIRECT_INDEX },
-  { id:'mental', name:'Mental & Psychological', desc:'Race-day nerves, low moments, quitting, motivation, and self-talk.', ready:true,
+  { id:'mental', name:'Mental & Psychological', tone:'mid', desc:'Race-day nerves, low moments, quitting, motivation, and self-talk.', ready:true,
     intro:"Mental struggles are part of endurance sport, and many are treatable. These pages separate normal pressure from patterns that need more support.",
     direct: MENTAL_DIRECT },
-  { id:'gear', name:'Gear & Logistics', desc:'Failures, fueling, pacing, crew, and weather mismatches.', ready:false },
-  { id:'training', name:'Training', desc:'Plateaus, overtraining, injury setbacks, life balance.', ready:false }
+  { id:'gear', name:'Gear & Logistics', tone:'low', desc:'Failures, fueling, pacing, crew, and weather mismatches.', ready:false },
+  { id:'training', name:'Training', tone:'low', desc:'Plateaus, overtraining, injury setbacks, life balance.', ready:false }
 ];
 
 let state = { screen:'hub', categoryId:null, treeId:null, nodeId:null, step:1 };
@@ -27,7 +27,7 @@ function renderDisclaimer(){
 
 function crisisLine(cat){
   if(!cat || cat.id !== 'mental') return '';
-  return `<div class="tk-disclaimer" style="margin:0 0 22px;color:var(--ink);background:var(--high-bg);border-color:rgba(178,59,46,0.4);"><strong style="color:var(--ink);">If you're thinking about hurting yourself:</strong> call or text 988 (US), or call 911 if you're in immediate danger. Outside the US, use your local emergency number.</div>`;
+  return `<div class="tk-crisis"><strong>If you're thinking about hurting yourself:</strong> call or text 988 (US), or call 911 if you're in immediate danger. Outside the US, use your local emergency number.</div>`;
 }
 
 function footer(){
@@ -38,10 +38,6 @@ function renderHub(){
   return `
   <div class="tk-hero">
     <div class="wrap">
-      <a class="tk-brand" href="https://jcady.org" target="_blank" rel="noopener">
-        <img src="assets/cairn-logo.svg" alt="Cairn logo">
-        <span>Jeff <em>Cady</em></span>
-      </a>
       <div class="tk-eyebrow">TRIBAL KNOWLEDGE</div>
       <h1>Problems endurance athletes actually run into</h1>
       <p>The knowledge that keeps people safe in this sport already exists. It's just scattered across forums, buried in a coach's head, or something people only learn by getting hurt once. This puts it in one place, sourced and organized.</p>
@@ -54,7 +50,7 @@ function renderHub(){
       <div class="tk-section-sub">Physical &amp; Medical and Mental &amp; Psychological are live. The rest are coming.</div>
       <div class="cat-grid">
         ${CATEGORIES.map(c => `
-          <div class="cat-card ${c.ready?'':'disabled'}" ${c.ready?`data-nav="category" data-id="${c.id}"`:''}>
+          <div class="cat-card tone-${c.tone} ${c.ready?'':'disabled'}" ${c.ready?`data-nav="category" data-id="${c.id}"`:''}>
             <h3>${escapeHtml(c.name)}</h3>
             <p>${escapeHtml(c.desc)}</p>
             <span class="tag">${c.ready ? 'Browse &rarr;' : 'Coming soon'}</span>
@@ -77,7 +73,7 @@ function renderCategory(){
       <button class="back-link" data-nav="hub" style="color:var(--dim);">&larr; All categories</button>
       <div class="tk-eyebrow">${escapeHtml(cat.name).toUpperCase()}</div>
       <h1 style="font-size:clamp(26px,4.5vw,38px);">${escapeHtml(cat.name)}</h1>
-      <p style="font-size:14.5px;color:#d9d2c0;max-width:56ch;margin-top:10px;">${escapeHtml(cat.intro)}</p>
+      <p style="font-size:14.5px;max-width:58ch;margin-top:10px;">${escapeHtml(cat.intro)}</p>
     </div>
   </div>
   <div class="tk-body">
@@ -132,34 +128,39 @@ function renderTreeQuestion(){
 function renderOutcome(){
   const outcome = OUTCOMES[state.nodeId];
   const tree = state.treeId ? DECISION_TREES.find(t => t.id === state.treeId) : null;
-  const catId = tree ? tree.category : state.categoryId;
-  const cat = CATEGORIES.find(c => c.id === catId);
+  const cat = CATEGORIES.find(c => c.id === (tree ? tree.category : state.categoryId));
   const band = outcome.band || (outcome.severity === 'high' ? 'Seek medical attention' : outcome.severity === 'mid' ? 'Caution — monitor closely' : 'Generally manageable');
+  const level = { low:1, mid:2, high:3 }[outcome.severity] || 1;
+  const bars = [1,2,3].map(i => `<span class="${i <= level ? 'on-' + outcome.severity : ''}"></span>`).join('');
   return `
-  <div class="tk-body" style="padding-top:32px;">
-    <div class="wrap">
-      <button class="back-link" data-nav="category" data-id="${cat.id}">&larr; ${escapeHtml(cat.name)}</button>
-      ${crisisLine(cat)}
-      <div class="outcome-card">
-        <div class="outcome-band ${outcome.severity}">${escapeHtml(band)}</div>
-        <div class="outcome-body">
-          <h2>${escapeHtml(outcome.title)}</h2>
-          ${outcome.symptoms ? `<h5>What it typically feels like</h5><p>${escapeHtml(outcome.symptoms)}</p>` : ''}
-          <h5>What's likely going on</h5>
-          <p>${escapeHtml(outcome.body)}</p>
-          <div class="action-box">
-            <h5>Do this now</h5>
-            <p>${escapeHtml(outcome.action)}</p>
-          </div>
-          ${outcome.prevention ? `<h5>Prevention</h5><p>${escapeHtml(outcome.prevention)}</p>` : ''}
-          <div class="source-line">Source: <a href="${escapeHtml(outcome.source.url)}" target="_blank" rel="noopener">${escapeHtml(outcome.source.title)}</a> &mdash; ${escapeHtml(outcome.source.host)}</div>
+  <div class="wrap tk-body" style="padding-top:18px;">
+    <button class="back-link" data-nav="category" data-id="${cat.id}">&larr; ${escapeHtml(cat.name)}</button>
+    ${crisisLine(cat)}
+    <div class="outcome-card">
+      <div class="outcome-band ${outcome.severity}">${escapeHtml(band)}</div>
+      <div class="outcome-severity" aria-label="Severity: ${escapeHtml(outcome.severity)}">${bars}</div>
+      <div class="outcome-body">
+        <div class="tk-eyebrow">${escapeHtml(cat.name)} &middot; likely cause</div>
+        <h2>${escapeHtml(outcome.title)}</h2>
+        ${outcome.symptoms ? `<h5>What it typically feels like</h5><p>${escapeHtml(outcome.symptoms)}</p>` : ''}
+        <h5>What's likely going on</h5>
+        <p>${escapeHtml(outcome.body)}</p>
+        <div class="action-box">
+          <h5>Do this now</h5>
+          <p>${escapeHtml(outcome.action)}</p>
         </div>
+        ${outcome.prevention ? `<h5>Prevention</h5><p>${escapeHtml(outcome.prevention)}</p>` : ''}
+        <div class="source-line">Source: <a href="${escapeHtml(outcome.source.url)}" target="_blank" rel="noopener">${escapeHtml(outcome.source.title)}</a> &mdash; ${escapeHtml(outcome.source.host)}</div>
       </div>
-      <div class="tk-nav" style="margin-top:20px;">
-        ${tree ? `<button type="button" class="tk-btn ghost small" data-nav="tree-start" data-id="${tree.id}">Start over &rarr;</button>` : ''}
-        <button type="button" class="tk-btn ghost small" data-nav="category" data-id="${cat.id}">All ${escapeHtml(cat.name)} topics &rarr;</button>
-        <a class="tk-btn ghost small" href="contribute.html#${state.nodeId}">Suggest a change to this page</a>
-      </div>
+    </div>
+    <div class="outcome-report">
+      <h5>Something off on this page?</h5>
+      <p>Suggest a correction or a better source. Edits go through GitHub and a maintainer reviews them.</p>
+      <a class="tk-btn ghost block" href="contribute.html#${escapeHtml(state.nodeId)}">Suggest a change</a>
+    </div>
+    <div class="tk-nav">
+      ${tree ? `<button type="button" class="tk-btn ghost small" data-nav="tree-start" data-id="${tree.id}">Start over</button>` : ''}
+      <button type="button" class="tk-btn small" data-nav="category" data-id="${cat.id}">All ${escapeHtml(cat.name)} topics</button>
     </div>
   </div>
   ${footer()}`;
