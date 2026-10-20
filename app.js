@@ -40,15 +40,16 @@ function footer(){
 
 function glossaryList(q){
   const needle = (q || '').trim().toLowerCase();
-  const items = GLOSSARY.filter(g => !needle ||
+  const items = GLOSSARY.filter(g => appliesTo(g, state.sport) && (!needle ||
     g.term.toLowerCase().includes(needle) ||
     g.aliases.some(a => a.toLowerCase().includes(needle)) ||
-    g.def.toLowerCase().includes(needle));
+    g.def.toLowerCase().includes(needle)));
   if(!items.length) return `<p class="gloss-empty">No match. Try a shorter word, or <a href="contribute.html">suggest the term</a>.</p>`;
   return items.map(g => `
     <div class="gloss-item">
       <h4>${escapeHtml(g.term)}${g.kind === 'community' ? ' <span class="gloss-kind">Community usage</span>' : ''}</h4>
       <p>${escapeHtml(g.def)}</p>
+      <p class="gloss-sports">Applies to: ${g.sports.map(id => escapeHtml((SPORTS.find(x => x.id === id) || {name:id}).name)).join(', ')}</p>
     </div>`).join('');
 }
 
@@ -107,6 +108,7 @@ function renderGlossary(){
   </div>
   <div class="tk-body">
     <div class="wrap">
+      <p class="gloss-scope">Showing terms for <strong>${escapeHtml((SPORTS.find(x => x.id === state.sport) || {name:'Ultra running'}).name)}</strong>. Change the sport on the home page.</p>
       <input class="gloss-search" id="gloss-q" type="search" placeholder="Search, like bonk, DFL, or cutoff" aria-label="Search the glossary" autocomplete="off">
       <div id="gloss-list" class="gloss-list">${glossaryList('')}</div>
     </div>
