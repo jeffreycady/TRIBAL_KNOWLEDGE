@@ -178,3 +178,8 @@ h1,h2,h3,h4,h5{font-family:var(--tk-display);text-transform:uppercase;letter-spa
 /* Share with a training partner */
 .share-row{display:flex;align-items:center;gap:12px;flex-wrap:wrap;margin:18px 0 6px;}
 .share-status{font-size:14px;color:var(--dim);}
+
+/* Pre-race pointer to UERA */
+.outcome-body .uera-box{background:var(--panel-2);border-left:4px solid var(--sage);border-radius:12px;padding:16px 16px 14px;margin-top:14px;}
+.outcome-body .uera-box h5{color:var(--sage-ink);margin-top:0;}
+.outcome-body .uera-box .tk-btn{margin-top:6px;}

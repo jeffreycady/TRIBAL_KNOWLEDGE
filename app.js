@@ -153,6 +153,11 @@ function renderOutcome(){
           <h5>Do this now</h5>
           <p>${escapeHtml(outcome.action)}</p>
         </div>
+        ${outcome.prerace ? `<div class="uera-box">
+          <h5>Racing soon?</h5>
+          <p>Before race day, check your readiness across the whole plan with the Ultra Event Readiness &amp; Risk Assessment (UERA), built by Jeff Cady.</p>
+          <a class="tk-btn small" href="https://uera.jcady.org" target="_blank" rel="noopener">Take UERA</a>
+        </div>` : ''}
         ${outcome.prevention ? `<h5>Prevention</h5><p>${escapeHtml(outcome.prevention)}</p>` : ''}
         <div class="source-line">Source: <a href="${escapeHtml(outcome.source.url)}" target="_blank" rel="noopener">${escapeHtml(outcome.source.title)}</a> &mdash; ${escapeHtml(outcome.source.host)}</div>
       </div>

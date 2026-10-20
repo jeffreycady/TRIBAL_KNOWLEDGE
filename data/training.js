@@ -12,6 +12,7 @@ Object.assign(OUTCOMES, {
     source:{title:"ACSM Position Stand: Progression models in resistance training for healthy adults", host:"American College of Sports Medicine (2009)", url:"https://sfu.ca/~ryand/kin343/ACSMresistance.pdf"}
   },
   out_taper:{
+    prerace:true,
     severity:'low', title:"Taper: cut volume, not the whole plan",
     body:"A meta-analysis of tapering in competitive athletes (Bosquet and colleagues, 2007) found that a taper of about two weeks gave the best gains. The largest benefit came from cutting training volume substantially, by roughly 41 to 60%, with the cut getting steeper toward the end. Tapers that kept intensity or frequency unchanged gave smaller benefits.",
     action:"Start reducing training volume about two weeks before the race, with the biggest cut in the final week. Don't add new hard sessions during the taper.",

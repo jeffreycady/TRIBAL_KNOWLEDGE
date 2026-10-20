@@ -10,12 +10,14 @@ Object.assign(OUTCOMES, {
     source:{title:"988 Suicide & Crisis Lifeline fact sheet", host:"SAMHSA", url:"https://www.samhsa.gov/sites/default/files/988-factsheet.pdf"}
   },
   out_pre_reappraise:{
+    prerace:true,
     severity:'low', title:"Nerves that can work for you",
     body:"Pre-race nerves are normal arousal, and they can help performance. In one study of 91 competitive swimmers, athletes who expected to reach their goals read their anxiety as more helpful than athletes with negative or uncertain expectations. It's a single study, so treat this as a reframe to try, not a guarantee.",
     action:"Name it plainly, like 'this is my body getting ready.' Pick one process goal for the first hour, such as fueling on schedule or a cue word. Use the routine you practiced in training.",
     source:{title:"Competitive anxiety can be facilitative for performance", host:"Coach Science (SDSU)", url:"https://coachsci.sdsu.edu/csa/vol93/jones.htm"}
   },
   out_pre_persistent:{
+    prerace:true,
     severity:'mid', band:'Get professional support', title:"Pre-race dread is affecting daily life",
     body:"Nerves that start to affect sleep, eating, training, or your willingness to race are more than normal pre-race arousal. Someone trained in this area can help you sort out what's going on.",
     action:"Talk with a therapist or sport psychologist who works with athletes, or ask your doctor for a referral. If it turns into thoughts of hurting yourself, call or text 988 now.",

@@ -18,18 +18,21 @@ Object.assign(OUTCOMES, {
     source:{title:"Serious adverse events in trail running: a review of fatal, missing and catastrophic cases", host:"Wilderness & Environmental Medicine (2025)", url:"https://repository.up.ac.za/server/api/core/bitstreams/55430fce-09b0-4fba-b86d-6b3e0fef1d94/content"}
   },
   out_fuel_plan:{
+    prerace:true,
     severity:'low', title:"Fuel and drink on a schedule, not by feel",
     body:"The ACSM position stand on exercise and fluid replacement (2007) advises replacing sweat losses rather than drinking a fixed amount. It recommends starting to drink early and at regular intervals, about 500 ml roughly two hours before exercise, and sodium in fluids for efforts over about an hour, around 0.5 to 0.7 g per liter. It uses body-weight change as the benchmark for fluid needs.",
     action:"Write a fueling and fluid plan for your race: a set time to eat, a target fluid amount per hour, and sodium for long efforts. Test it in training. Weigh yourself before and after long runs to check your fluid plan.",
     source:{title:"American College of Sports Medicine position stand: Exercise and fluid replacement", host:"Medicine & Science in Sports & Exercise (ACSM) / PubMed", url:"https://pubmed.ncbi.nlm.nih.gov/17277604/"}
   },
   out_pacing_early:{
+    prerace:true,
     severity:'low', title:"Went out too fast? Plan a slowdown on purpose",
     body:"In a study of the 100 km Lauf Biel (2000 to 2009), the top ten male finishers slowed over the first two segments and held most of their pace later (Knechtle and colleagues, 2015). That's one race, men only, and descriptive, but it suggests planning an early slowdown rather than racing the first hours by feel.",
     action:"Slow down on purpose now, not later. Check your effort for the next hour. Eat and drink before you're hungry or thirsty. Pick your next checkpoint and aim to hold effort until you reach it.",
     source:{title:"Pacing strategy in male elite and age-group 100 km ultra-marathoners", host:"Open Access Journal of Sports Medicine (2015) / PMC", url:"https://pmc.ncbi.nlm.nih.gov/articles/PMC4376307"}
   },
   out_exit_plan:{
+    prerace:true,
     severity:'low', title:"Plan your exit before you need it",
     body:"In the same 2022 South African marathon, most runners who didn't finish (63% of those surveyed) hiked back to the nearest aid station, and 19% were then taken out by shuttle (Maleka and colleagues, 2026). Knowing your exit points ahead of time makes a stop safer.",
     action:"Before race day, mark the aid stations and the nearest road or exit on your route. Tell your crew or a friend your exit plan and check-in times. If you want to stop, head to the nearest aid station rather than pushing further along the course.",

@@ -23,6 +23,7 @@ Goal: Tribal Knowledge on iPhone and Android, works offline, picks up content up
 - **Install path:** Installable web app first, then the APK.
 - **Mental & Psychological:** Done next, with science behind each piece of advice, following UERA's source-grounding rules.
 - **Live site:** Publish directly to tk.jcady.org for now.
+- **Pre-race content:** Outcomes about preparing for a race (`prerace: true` in the data) show a pointer to UERA (uera.jcady.org) for a full readiness check.
 
 ## Open items
 
