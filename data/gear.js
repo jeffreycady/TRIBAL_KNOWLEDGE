@@ -2,7 +2,7 @@
    Every outcome cites a source. Keep ids stable when editing.
    To suggest a change, open contribute.html. */
 
-const GEAR_IDS = new Set(['start-bike','sbb_root','out_sb_bike','out_sb_run','out_sb_plan','out_sb_essentials','sb_root','start-backcountry','out_blue_bag_how','out_blue_bag_where','out_water_treat','out_filter_sawyer','out_filter_platypus','out_filter_general','out_catholes','out_waste_bag','gs_root','gear-sanitation','out_lost','out_cold','out_fuel_plan','out_fuel_ultra','out_pacing_early','out_exit_plan','gl_root','gc_root','gf_root','gp_root','gx_root']);
+const GEAR_IDS = new Set(['start-bike','sbb_root','out_sb_bike','out_sb_run','out_sb_plan','out_sb_essentials','sb_root','start-backcountry','out_blue_bag_where','out_water_treat','out_filter_sawyer','out_filter_platypus','out_filter_general','out_catholes','out_waste_bag','gs_root','gear-sanitation','out_lost','out_cold','out_fuel_plan','out_fuel_ultra','out_pacing_early','out_exit_plan','gl_root','gc_root','gf_root','gp_root','gx_root']);
 
 Object.assign(OUTCOMES, {
   out_fuel_ultra:{
@@ -108,16 +108,22 @@ Object.assign(OUTCOMES, {
     source:{title:"Principle 3: Dispose of Waste Properly", host:"Leave No Trace Center for Outdoor Ethics", url:"https://lnt.org/learn/principle-3"}
   },
   out_waste_bag:{
-    severity:'mid', band:'Check the rules first', title:"I need to poop in the woods, and I may have to carry it out",
+    severity:'mid', band:'Check the rules first', title:"I have to carry my poop out: how to use a pack-out (blue) bag",
     body:"Some places require you to pack out solid human waste. Zion National Park requires carrying it out from all canyons, including the Narrows, and offers disposal bags at its bookstore and through local outfitters. Leave No Trace also notes that land managers may require pack-out in fragile settings, such as narrow canyons.",
     steps:[
       "Check the rules for the park or area before you go, including whether you have to carry waste out.",
       "Get the bags before you leave. Ask the permit office or bookstore where to buy them.",
-      "Carry one bag per person per night when the area requires it.",
+      "Open the outer bag and pull out the inner liner. Take out the hand sanitizer and toilet paper.",
+      "Sit over the bag and hold the plastic bag around your hips so it catches the waste.",
+      "When you're done, use the cinch loop on the inner pouch to seal and tie it off.",
+      "Run your fingers along the zip seal on the outer bag to close it.",
+      "Check that the seal has no openings or leaks before you store the bag.",
+      "On a multi-day trip, keep the used bag in the bottom of your pack, away from food.",
       "Carry out all solid human waste, toilet paper, and feminine hygiene products.",
       "Dispose of the bag only where the land manager says to."
     ],
-    action:"Check the land manager's rules before you go, including any bag or permit requirement. Carry a pack-out waste bag sized for your trip, and carry out used toilet paper and hygiene products. Dispose of the bag only where the land manager says to.",
+    action:"Carry one bag per person per night when the area requires it. Seal it, check it, and carry it out. Ask the park where to dispose of it.",
+    links:[{name:"How to use a WAG bag", url:"https://thedyrt.com/magazine/gear/wag-bag-camping-waste/", note:"step-by-step use and disposal"}],
     source:{title:"Zion National Park: Carry Out Solid Human Waste (park staff statements)", host:"National Parks Traveler (2025)", url:"https://www.nationalparkstraveler.org/node/20195"}
   }
 });
@@ -137,21 +143,6 @@ DECISION_TREES.push(
 );
 
 Object.assign(OUTCOMES, {
-  out_blue_bag_how:{
-    severity:'low', band:'Pack it out', title:"How to use a pack-out (blue) bag",
-    body:"A pack-out bag, often called a WAG bag, is a toilet bag system you use in place of a cathole. Each bag has an outer bag and an inner pouch. The inner pouch holds a solidifying agent that turns the waste into a solid, and a small packet of toilet paper and hand sanitizer. Guadalupe Mountains requires one bag per person per night for overnight wilderness permits, and the park store sells them.",
-    steps:[
-      "Open the outer bag and pull out the inner liner. Take out the hand sanitizer and toilet paper.",
-      "Sit over the bag and hold the plastic bag around your hips so it catches the waste.",
-      "When you're done, use the cinch loop on the inner pouch to seal and tie it off.",
-      "Run your fingers along the zip seal on the outer bag to close it.",
-      "Check that the seal has no openings or leaks before you store the bag.",
-      "On a multi-day trip, keep the used bag in the bottom of your pack, away from food.",
-      "Carry it out. Dispose of it only as the land manager says. Where regular trash is allowed, the bag can go in a normal trash can once you're home. Some areas require a specific disposal site, so check before you leave."
-    ],
-    action:"Open the bag, use it over the plastic liner, seal the inner pouch, zip the outer bag, check for leaks, and carry it out. Ask the park where to dispose of it.",
-    source:{title:"Tips for using a WAG bag: what to know before you go", host:"The Dyrt (camping guide)", url:"https://thedyrt.com/magazine/gear/wag-bag-camping-waste/"}
-  },
   out_blue_bag_where:{
     severity:'low', band:'Check before you go', title:"Which parks require you to carry waste out",
     body:"More parks and wilderness areas now require you to carry out solid human waste. Zion requires it in all canyons, including the Narrows. Guadalupe Mountains requires a toilet bag system for overnight wilderness permits. Rio Grande Wild and Scenic River requires commercial and private river parties to pack out waste on overnight trips. Rules change, so check each land manager's current rules before you go.",
@@ -224,12 +215,6 @@ Object.assign(OUTCOMES, {
   }
 });
 
-NODES.gs_root.opts.push(
-  {label:"How do I use a blue bag?", next:'out_blue_bag_how'},
-  {label:"Which parks make me carry it out?", next:'out_blue_bag_where'},
-  {label:"I need clean water", next:'out_water_treat'},
-  {label:"My water filter is slow", next:'fs_root'}
-);
 Object.assign(NODES, {
   fs_root:{
     text:"Which water filter do you have?",
@@ -339,7 +324,30 @@ DECISION_TREES.push(
 );
 
 DECISION_TREES.push(
-  { id:'start-backcountry', sports:['ultra','trail-run','hiking','mtb','gravel','bikepacking','trekking','sky','skimo','mountaineering','climbing','snowshoe'], category:'gear', title:"Start here: trails and backcountry", blurb:"The basics for planning and packing before you head out.", root:'sb_root' }
+  { id:'start-backcountry', sports:['trail-run','hiking','mtb','gravel','bikepacking','trekking','sky','skimo','mountaineering','climbing','snowshoe'], category:'gear', title:"Start here: trails and backcountry", blurb:"The basics for planning and packing before you head out.", root:'sb_root' }
 );
 
-const GEAR_DIRECT = ['out_sb_bike','out_sb_run','out_sb_plan','out_sb_essentials','out_blue_bag_how','out_blue_bag_where','out_water_treat','out_filter_sawyer','out_filter_platypus','out_filter_general','out_catholes','out_waste_bag','out_lost','out_cold','out_fuel_plan','out_fuel_ultra','out_pacing_early','out_exit_plan'];
+
+NODES.gs_root.opts = [
+  {label:"I need to poop", next:'pn_root'},
+  {label:"I need clean water", next:'pw_root'}
+];
+Object.assign(NODES, {
+  pn_root:{
+    text:"Can you dig a hole here?",
+    opts:[
+      {label:"Yes, I can dig a hole", next:'out_catholes'},
+      {label:"No, I have to carry it out", next:'out_waste_bag'},
+      {label:"Which parks make me carry it out?", next:'out_blue_bag_where'}
+    ]
+  },
+  pw_root:{
+    text:"What do you need with water?",
+    opts:[
+      {label:"Make it safe to drink", next:'out_water_treat'},
+      {label:"My filter is slow", next:'fs_root'}
+    ]
+  }
+});
+
+const GEAR_DIRECT = ['out_lost','out_cold','out_fuel_plan','out_fuel_ultra','out_pacing_early','out_exit_plan'];
