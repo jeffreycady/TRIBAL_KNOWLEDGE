@@ -157,6 +157,10 @@ function renderOutcome(){
         <div class="source-line">Source: <a href="${escapeHtml(outcome.source.url)}" target="_blank" rel="noopener">${escapeHtml(outcome.source.title)}</a> &mdash; ${escapeHtml(outcome.source.host)}</div>
       </div>
     </div>
+    <div class="share-row">
+      <button type="button" class="tk-btn ghost small" data-share="${escapeHtml(state.nodeId)}">Share with a training partner</button>
+      <span class="share-status" role="status" aria-live="polite"></span>
+    </div>
     <div class="outcome-report">
       <h5>Something off on this page?</h5>
       <p>Suggest a correction or a better source. Edits go through GitHub and a maintainer reviews them.</p>
@@ -170,7 +174,37 @@ function renderOutcome(){
   ${footer()}`;
 }
 
+function shareText(outcome){
+  const site = 'https://tk.jcady.org';
+  const first = (outcome.action || '').split(/(?<=\.)\s/)[0];
+  return `${outcome.title}\n\nDo this now: ${first}\n\nGeneral information, not medical advice. Source: ${outcome.source.title}\n${site}`;
+}
+
+function setShareStatus(msg){
+  const el = document.querySelector('.share-status');
+  if(el) el.textContent = msg;
+}
+
+async function shareOutcome(id){
+  const outcome = OUTCOMES[id];
+  if(!outcome) return;
+  const text = shareText(outcome);
+  if(navigator.share){
+    try{ await navigator.share({ title:'Tribal Knowledge', text, url:'https://tk.jcady.org' }); return; }
+    catch(e){ if(e && e.name === 'AbortError') return; }
+  }
+  try{
+    await navigator.clipboard.writeText(text);
+    setShareStatus('Copied. Paste it into a message.');
+  }catch(e){
+    setShareStatus('Could not copy. Select the text and copy it manually.');
+  }
+}
+
 function attachEvents(){
+  document.querySelectorAll('[data-share]').forEach(el => {
+    el.addEventListener('click', () => shareOutcome(el.dataset.share));
+  });
   document.querySelectorAll('[data-nav]').forEach(el => {
     el.addEventListener('click', () => {
       const nav = el.dataset.nav;
