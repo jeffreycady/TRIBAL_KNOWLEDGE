@@ -11,8 +11,12 @@ const CATEGORIES = [
   { id:'mental', name:'Mental & Psychological', tone:'mid', desc:'Race-day nerves, low moments, quitting, motivation, and self-talk.', ready:true,
     intro:"Mental struggles are part of endurance sport, and many are treatable. These pages separate normal pressure from patterns that need more support.",
     direct: MENTAL_DIRECT },
-  { id:'gear', name:'Gear & Logistics', tone:'low', desc:'Failures, fueling, pacing, crew, and weather mismatches.', ready:false },
-  { id:'training', name:'Training', tone:'low', desc:'Plateaus, overtraining, injury setbacks, life balance.', ready:false }
+  { id:'gear', name:'Gear & Logistics', tone:'low', desc:'Getting lost, cold and wet, fueling and heat, pacing, and getting off course safely.', ready:true,
+    intro:"Most gear problems are really planning problems. Find the situation you're in and the next step is clear.",
+    direct: GEAR_DIRECT },
+  { id:'training', name:'Training', tone:'low', desc:'Plateaus, tapering for a race, and running down or sleeping badly.', ready:true,
+    intro:"Training problems usually come from too little change or too much load. These pages help you find which.",
+    direct: TRAIN_DIRECT }
 ];
 
 let state = { screen:'hub', categoryId:null, treeId:null, nodeId:null, step:1 };

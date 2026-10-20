@@ -18,8 +18,8 @@ Most of what makes endurance sports dangerous for newcomers isn't the distance. 
 |---|---|
 | Physical & Medical | Live. Injuries, illness, in-the-moment medical situations. |
 | Mental & Psychological | Live. Race-day nerves, low moments, quitting, motivation, self-talk. |
-| Gear & Logistics | Planned |
-| Training | Planned |
+| Gear & Logistics | Live. Getting lost, cold and wet, fueling and heat, pacing, exit plans.
+| Training | Live. Plateaus, tapering, run-down or poor sleep.
 
 ## Project layout
 
@@ -28,6 +28,8 @@ index.html            App shell (hub, categories, trees, outcomes)
 app.js                Engine: renders the decision trees from the data
 data/physical.js      Physical & Medical questions, answers, outcomes, sources
 data/mental.js        Mental & Psychological content
+data/gear.js          Gear & Logistics content
+data/training.js      Training content
 contribute.html/.js   Public page: how it works, the logic, edit links
 styles.css            Shared styles (app and contribute page)
 sw.js                 Service worker: offline cache, network-first for data
@@ -58,6 +60,7 @@ Run these before opening a pull request:
 ```bash
 node --check app.js && node --check contribute.js && node --check sw.js
 node --check data/physical.js && node --check data/mental.js
+node --check data/gear.js && node --check data/training.js
 node scripts/check-content.js
 ```
 

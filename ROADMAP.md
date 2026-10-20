@@ -12,8 +12,8 @@ Goal: Tribal Knowledge on iPhone and Android, works offline, picks up content up
 | 4. Mental & Psychological | Done (v1) | 4 trees, 9 outcomes, sourced. Needs wording review. |
 | 5. Contribute flow in the app | Done (v1) | `contribute.html`: how it works, the logic, edit links, rules. |
 | 6. Android APK | Next | See `docs/ANDROID.md`. Needs a signing key and a machine with the Android SDK. |
-| 7. Gear & Logistics | Planned | Next category after APK. |
-| 8. Training | Planned | |
+| 7. Gear & Logistics | Done (v1) | `data/gear.js`, 4 trees, 5 outcomes, sourced. Needs wording review. |
+| 8. Training | Done (v1) | `data/training.js`, 3 trees, 3 outcomes, sourced. Injury-return content not added yet (no verified source). |
 | 9. Hosting review | Open | GitHub Pages now. Revisit with Cloudflare Pages when we need headers or a submission queue. See `docs/ARCHITECTURE.md`. |
 
 ## Decisions (from Jeff)

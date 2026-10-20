@@ -2,8 +2,8 @@
    Reads the same data files as the app, so this page can't drift from it. */
 
 const REPO = 'https://github.com/jeffreycady/TRIBAL_KNOWLEDGE';
-const CATEGORY_FILES = { physical:'data/physical.js', mental:'data/mental.js' };
-const CATEGORY_NAMES = { physical:'Physical & Medical', mental:'Mental & Psychological' };
+const CATEGORY_FILES = { physical:'data/physical.js', mental:'data/mental.js', gear:'data/gear.js', training:'data/training.js' };
+const CATEGORY_NAMES = { physical:'Physical & Medical', mental:'Mental & Psychological', gear:'Gear & Logistics', training:'Training' };
 
 function esc(s){
   return String(s==null?'':s).replace(/[&<>"']/g, c => ({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));
@@ -15,7 +15,11 @@ function outcomeLabel(id){
 
 // Each id lives in exactly one data file: the file that defines it.
 function homeCategory(id){
-  return PHYSICAL_IDS.has(id) ? 'physical' : 'mental';
+  if(PHYSICAL_IDS.has(id)) return 'physical';
+  if(typeof MENTAL_IDS !== 'undefined' && MENTAL_IDS.has(id)) return 'mental';
+  if(typeof GEAR_IDS !== 'undefined' && GEAR_IDS.has(id)) return 'gear';
+  if(typeof TRAIN_IDS !== 'undefined' && TRAIN_IDS.has(id)) return 'training';
+  return 'physical';
 }
 
 function itemActions(cat, id){

@@ -2,14 +2,47 @@
   "name": "Tribal Knowledge",
   "short_name": "Tribal Knowledge",
   "description": "Problems endurance athletes actually run into, and what to do about them — grounded in real sports medicine, not guesswork.",
+  "id": "./",
   "start_url": "./index.html",
   "scope": "./",
+  "orientation": "portrait",
   "display": "standalone",
   "background_color": "#141614",
   "theme_color": "#141614",
   "icons": [
-    { "src": "icon-192.png", "sizes": "192x192", "type": "image/png", "purpose": "any" },
-    { "src": "icon-512.png", "sizes": "512x512", "type": "image/png", "purpose": "any" },
-    { "src": "icon-512.png", "sizes": "512x512", "type": "image/png", "purpose": "maskable" }
+    {
+      "src": "icon-192.png",
+      "sizes": "192x192",
+      "type": "image/png",
+      "purpose": "any"
+    },
+    {
+      "src": "icon-512.png",
+      "sizes": "512x512",
+      "type": "image/png",
+      "purpose": "any"
+    },
+    {
+      "src": "icon-512.png",
+      "sizes": "512x512",
+      "type": "image/png",
+      "purpose": "maskable"
+    }
+  ],
+  "screenshots": [
+    {
+      "src": "assets/screenshot-narrow.png",
+      "sizes": "1080x1920",
+      "type": "image/png",
+      "form_factor": "narrow",
+      "label": "Tribal Knowledge home screen"
+    },
+    {
+      "src": "assets/screenshot-wide.png",
+      "sizes": "1280x800",
+      "type": "image/png",
+      "form_factor": "wide",
+      "label": "Tribal Knowledge home screen"
+    }
   ]
 }

@@ -135,3 +135,5 @@ DECISION_TREES.push(
 );
 
 const MENTAL_DIRECT = ['out_pre_reappraise','out_mid_focus','out_dnf_pause','out_self_talk','out_overtraining','out_persistent_low_mood','out_crisis'];
+
+const MENTAL_IDS = new Set(['mm_driver', 'mm_physical', 'mm_safety', 'mp_root', 'mt_root', 'mv_bigger', 'mv_root', 'out_crisis', 'out_dnf_pause', 'out_mental_uncertain', 'out_mid_check_basics', 'out_mid_focus', 'out_motivation_autonomy', 'out_overtraining', 'out_persistent_low_mood', 'out_pre_persistent', 'out_pre_reappraise', 'out_self_talk']);

@@ -1,11 +1,11 @@
 /* Tribal Knowledge service worker.
    Goal: the app keeps working with no signal (trail, race course, remote
-   spot). Precache the app shell on install; serve from cache first, and
-   fall back to the network only for things not yet cached.
+   spot). Precache the app shell on install. The app's own files are network
+   first (cache when offline or slow), fonts are cache first.
    Bump CACHE_VERSION whenever index.html or any shell file changes so
    returning users pick up the new content. */
 
-const CACHE_VERSION = 'tk-v9';
+const CACHE_VERSION = 'tk-v10';
 const SHELL_CACHE = `${CACHE_VERSION}-shell`;
 const RUNTIME_CACHE = `${CACHE_VERSION}-runtime`;
 const NETWORK_TIMEOUT_MS = 3000;
@@ -24,7 +24,11 @@ const SHELL_ASSETS = [
   './contribute.html',
   './contribute.js',
   './data/physical.js',
-  './data/mental.js'
+  './data/mental.js',
+  './data/gear.js',
+  './data/training.js',
+  './assets/screenshot-narrow.png',
+  './assets/screenshot-wide.png'
 ];
 
 self.addEventListener('install', (event) => {
