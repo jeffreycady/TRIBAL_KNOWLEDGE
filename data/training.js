@@ -2,7 +2,7 @@
    Every outcome cites a source. Keep ids stable when editing.
    To suggest a change, open contribute.html. */
 
-const TRAIN_IDS = new Set(['out_plateau_vary','out_taper','out_sleep','out_reds_suspected','out_reds_urgent','tp_root','tt_root','tr_root']);
+const TRAIN_IDS = new Set(['out_plateau_vary','out_taper','out_taper_feelings','out_sleep','out_reds_suspected','out_reds_urgent','tp_root','tt_root','tr_root']);
 
 Object.assign(OUTCOMES, {
   out_plateau_vary:{
@@ -27,6 +27,12 @@ Object.assign(OUTCOMES, {
 });
 
 Object.assign(OUTCOMES, {
+  out_taper_feelings:{
+    severity:'low', band:'Common in the last weeks', title:"Taper tantrums: restless, grumpy, or feeling a bit off",
+    body:"Many athletes get irritable, restless, or anxious in the last weeks before a race, and some feel flat or like they're coming down with something. The research on this is limited. A 2023 scoping review of tapering psychology (Stone and colleagues) found that taper is studied as a stressor and that mood and fatigue are key themes, but it concluded the evidence base is small. Why it happens isn't established.",
+    action:"Keep the routine: regular sleep, normal meals, and the short easy runs in your plan. Don't add extra workouts to burn off restlessness. If you have a fever, a productive cough, chest tightness, or symptoms that last more than a week, see a clinician before race day, and don't do hard training while you have a fever.",
+    source:{title:"The Psychology of Athletic Tapering in Sport: A Scoping Review", host:"Sports Medicine (2023)", url:"https://doi.org/10.1007/s40279-022-01798-6"}
+  },
   out_reds_suspected:{
     severity:'mid', band:'Talk to a clinician soon', title:"Possible REDs: not eating enough for the training you do",
     body:"REDs (Relative Energy Deficiency in Sport) happens when energy intake doesn't cover what training uses. The IOC consensus (Mountjoy and colleagues, 2018) links it to effects on metabolism, menstrual function, bone health, immunity, the gut, and mental health. Warning signs include missed periods, bone or stress-injury pain, frequent illness, and unexplained weight loss. Men are affected too.",
@@ -65,6 +71,10 @@ Object.assign(NODES, {
   }
 });
 
+// Taper-period feelings branches
+NODES.tt_root.opts.push({label:"Irritable, restless, or anxious about the race", next:'out_taper_feelings'});
+NODES.tt_root.opts.push({label:"Feeling flat, or like I'm coming down with a cold", next:'out_taper_feelings'});
+
 // REDs branches on the training trees
 NODES.tr_root.opts.unshift({label:"Fainting, dizziness when standing, chest pain, or a very slow pulse", next:'out_reds_urgent'});
 NODES.tr_root.opts.push({label:"Missed periods, bone or stress-injury pain, frequent illness, or unexplained weight loss", next:'out_reds_suspected'});
@@ -76,4 +86,4 @@ DECISION_TREES.push(
   { id:'training-recovery', category:'training', title:"Run-down, tired, or sleeping badly", blurb:"Tiredness is information. Work out whether it's sleep or training load.", root:'tr_root' }
 );
 
-const TRAIN_DIRECT = ['out_taper','out_plateau_vary','out_sleep','out_reds_suspected','out_reds_urgent'];
+const TRAIN_DIRECT = ['out_taper','out_taper_feelings','out_plateau_vary','out_sleep','out_reds_suspected','out_reds_urgent'];
