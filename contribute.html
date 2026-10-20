@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Suggest an update — Tribal Knowledge</title>
+<link rel="manifest" href="manifest.json">
+<meta name="theme-color" content="#1B2A1F">
+<meta name="color-scheme" content="light">
+<meta name="description" content="How Tribal Knowledge is built, and how to suggest changes to the questions, answers, and sources.">
+<link rel="icon" type="image/svg+xml" href="assets/cairn-logo.svg">
+<link rel="icon" type="image/png" sizes="32x32" href="favicon-32.png">
+<link rel="apple-touch-icon" href="icon-192.png">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Big+Shoulders+Display:wght@600;700;800&family=Source+Serif+4:ital,opsz,wght@0,8..60,400;0,8..60,600;1,8..60,400&family=IBM+Plex+Mono:wght@400;500;600&display=swap">
+<link rel="stylesheet" href="styles.css">
+</head>
+<body>
+<div class="tk-hero">
+  <div class="wrap">
+    <a class="tk-brand" href="index.html">
+      <img src="assets/cairn-logo.svg" alt="Cairn logo">
+      <span>Tribal <em>Knowledge</em></span>
+    </a>
+    <div class="tk-eyebrow">CONTRIBUTE</div>
+    <h1 style="font-size:clamp(28px,5vw,44px);">Suggest a change</h1>
+    <p>Everything the app says comes from a question, an answer, and a source. This page shows how it's built and how to suggest a change. Edits go through GitHub, and a maintainer checks each one against its source before it goes live.</p>
+  </div>
+</div>
+
+<div class="tk-body">
+  <div class="wrap">
+    <div class="tk-section-title">How to suggest a change</div>
+    <div class="tk-section-sub">Takes about five minutes. You need a free GitHub account.</div>
+    <ol class="how">
+      <li>Find the question or outcome you want to change below. Each one shows its <strong>id</strong>. Use the copy button to grab it.</li>
+      <li>Click <strong>Edit in GitHub</strong>. It opens the data file for that topic. GitHub asks you to fork the repo the first time.</li>
+      <li>Use the browser's search (Ctrl+F or Cmd+F) and paste the id to jump to it. Change only the text you're fixing. Keep the id the same.</li>
+      <li>If you change an outcome, add or update its <strong>source</strong> with a link you have actually read. Replace a source rather than leaving it blank.</li>
+      <li>Commit your change and open a <strong>pull request</strong>. In the description, say what changed, why, and link the source.</li>
+      <li>A maintainer checks the wording and the source before it goes live. They may ask for changes first.</li>
+    </ol>
+
+    <div class="tk-section-title">Rules for every change</div>
+    <div class="tk-section-sub">These keep the content safe and checkable.</div>
+    <ul class="rules">
+      <li>Every outcome needs a source you have read. Link the page itself, not a summary of it.</li>
+      <li>Don't diagnose, and don't give medication doses. Describe what to do and when to get help.</li>
+      <li>Actions should be specific and safe. If a symptom could be an emergency, route it to the emergency or clinician outcome.</li>
+      <li>Mental health pages keep the 988 crisis line visible. Don't remove it.</li>
+      <li>Plain language. Short sentences. If a claim comes from one study, say so.</li>
+    </ul>
+
+    <div class="tk-nav" style="margin-bottom:30px;">
+      <a class="tk-btn small" id="new-item" href="#" target="_blank" rel="noopener">Suggest something new</a>
+      <a class="tk-btn ghost small" href="index.html">Back to the app</a>
+    </div>
+
+    <div id="content"></div>
+  </div>
+</div>
+
+<div class="tk-footer">Tribal Knowledge — a project by <a href="https://jcady.org" target="_blank" rel="noopener">Jeff Cady</a> — <a href="https://github.com/jeffreycady/TRIBAL_KNOWLEDGE" target="_blank" rel="noopener">source on GitHub</a></div>
+
+<script src="data/physical.js"></script>
+<script src="data/mental.js"></script>
+<script src="contribute.js"></script>
+</body>
+</html>

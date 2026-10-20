@@ -1,0 +1,213 @@
+/* Tribal Knowledge app engine.
+   Renders the decision trees defined in data/*.js. Content lives in data/;
+   see contribute.html for how to suggest changes. */
+
+const REPO_URL = 'https://github.com/jeffreycady/TRIBAL_KNOWLEDGE';
+
+const CATEGORIES = [
+  { id:'physical', name:'Physical & Medical', desc:'Injuries, illness, and in-the-moment medical situations.', ready:true,
+    intro:"You don't need to know what it's called. Start with what you actually feel and where. A couple of questions gets you to the right answer.",
+    direct: DIRECT_INDEX },
+  { id:'mental', name:'Mental & Psychological', desc:'Race-day nerves, low moments, quitting, motivation, and self-talk.', ready:true,
+    intro:"Mental struggles are part of endurance sport, and many are treatable. These pages separate normal pressure from patterns that need more support.",
+    direct: MENTAL_DIRECT },
+  { id:'gear', name:'Gear & Logistics', desc:'Failures, fueling, pacing, crew, and weather mismatches.', ready:false },
+  { id:'training', name:'Training', desc:'Plateaus, overtraining, injury setbacks, life balance.', ready:false }
+];
+
+let state = { screen:'hub', categoryId:null, treeId:null, nodeId:null, step:1 };
+
+function escapeHtml(s){
+  return String(s==null?'':s).replace(/[&<>"']/g, c => ({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));
+}
+
+function renderDisclaimer(){
+  return `<div class="tk-disclaimer"><strong>Not medical advice.</strong> This is general information to help you think clearly in the moment, built from published sources. It is not a diagnosis and not a substitute for a real medical evaluation. When in doubt, or if anything is getting worse, seek qualified medical help.</div>`;
+}
+
+function crisisLine(cat){
+  if(!cat || cat.id !== 'mental') return '';
+  return `<div class="tk-disclaimer" style="margin:0 0 22px;color:var(--ink);background:var(--high-bg);border-color:rgba(178,59,46,0.4);"><strong style="color:var(--ink);">If you're thinking about hurting yourself:</strong> call or text 988 (US), or call 911 if you're in immediate danger. Outside the US, use your local emergency number.</div>`;
+}
+
+function footer(){
+  return `<div class="tk-footer">Tribal Knowledge — a project by <a href="https://jcady.org" target="_blank" rel="noopener">Jeff Cady</a> — works offline, nothing you enter is stored or sent anywhere. · <a href="contribute.html">Suggest an update</a></div>`;
+}
+
+function renderHub(){
+  return `
+  <div class="tk-hero">
+    <div class="wrap">
+      <a class="tk-brand" href="https://jcady.org" target="_blank" rel="noopener">
+        <img src="assets/cairn-logo.svg" alt="Cairn logo">
+        <span>Jeff <em>Cady</em></span>
+      </a>
+      <div class="tk-eyebrow">TRIBAL KNOWLEDGE</div>
+      <h1>Problems endurance athletes actually run into</h1>
+      <p>The knowledge that keeps people safe in this sport already exists. It's just scattered across forums, buried in a coach's head, or something people only learn by getting hurt once. This puts it in one place, sourced and organized.</p>
+      ${renderDisclaimer()}
+    </div>
+  </div>
+  <div class="tk-body">
+    <div class="wrap">
+      <div class="tk-section-title">Pick a category</div>
+      <div class="tk-section-sub">Physical &amp; Medical and Mental &amp; Psychological are live. The rest are coming.</div>
+      <div class="cat-grid">
+        ${CATEGORIES.map(c => `
+          <div class="cat-card ${c.ready?'':'disabled'}" ${c.ready?`data-nav="category" data-id="${c.id}"`:''}>
+            <h3>${escapeHtml(c.name)}</h3>
+            <p>${escapeHtml(c.desc)}</p>
+            <span class="tag">${c.ready ? 'Browse &rarr;' : 'Coming soon'}</span>
+          </div>
+        `).join('')}
+      </div>
+      <div class="tk-section-sub">Know something that should be here? <a href="contribute.html">Suggest an update &rarr;</a></div>
+    </div>
+  </div>
+  ${footer()}`;
+}
+
+function renderCategory(){
+  const cat = CATEGORIES.find(c => c.id === state.categoryId);
+  const trees = DECISION_TREES.filter(t => t.category === cat.id);
+  const direct = (cat.direct || []).filter(id => OUTCOMES[id]);
+  return `
+  <div class="tk-hero" style="padding:32px 0 28px;">
+    <div class="wrap">
+      <button class="back-link" data-nav="hub" style="color:var(--dim);">&larr; All categories</button>
+      <div class="tk-eyebrow">${escapeHtml(cat.name).toUpperCase()}</div>
+      <h1 style="font-size:clamp(26px,4.5vw,38px);">${escapeHtml(cat.name)}</h1>
+      <p style="font-size:14.5px;color:#d9d2c0;max-width:56ch;margin-top:10px;">${escapeHtml(cat.intro)}</p>
+    </div>
+  </div>
+  <div class="tk-body">
+    <div class="wrap">
+      ${crisisLine(cat)}
+      <div class="tk-section-title">What are you noticing?</div>
+      <div class="tk-section-sub">Pick whichever's closest. A plain description is enough to start.</div>
+      <ul class="tree-list">
+        ${trees.map(t => `
+          <li class="tree-item" data-nav="tree-start" data-id="${t.id}">
+            <div><h4>${escapeHtml(t.title)}</h4><p>${escapeHtml(t.blurb)}</p></div>
+            <span class="arrow">Start &rarr;</span>
+          </li>`).join('')}
+      </ul>
+      <div style="margin-top:36px;">
+        <div class="tk-section-title">Already know what it is?</div>
+        <div class="tk-section-sub">Jump straight to it.</div>
+        <ul class="simple-list">
+          ${direct.map(id => `
+            <li class="simple-item" data-nav="direct" data-id="${id}">
+              <div><h4>${escapeHtml(OUTCOMES[id].title)}</h4></div>
+              <span class="arrow">View &rarr;</span>
+            </li>`).join('')}
+        </ul>
+      </div>
+    </div>
+  </div>
+  ${footer()}`;
+}
+
+function renderTreeQuestion(){
+  const tree = DECISION_TREES.find(t => t.id === state.treeId);
+  const cat = CATEGORIES.find(c => c.id === tree.category);
+  const node = NODES[state.nodeId];
+  return `
+  <div class="tk-body" style="padding-top:32px;">
+    <div class="wrap">
+      <button class="back-link" data-nav="category" data-id="${cat.id}">&larr; ${escapeHtml(cat.name)}</button>
+      ${crisisLine(cat)}
+      <div class="q-card">
+        <div class="q-progress">${escapeHtml(tree.title).toUpperCase()} &middot; STEP ${state.step}</div>
+        <p class="q-text">${escapeHtml(node.text)}</p>
+        <div class="q-opts">
+          ${node.opts.map((o,i) => `<button type="button" class="q-opt" data-nav="answer" data-idx="${i}">${escapeHtml(o.label)}</button>`).join('')}
+        </div>
+      </div>
+    </div>
+  </div>
+  ${footer()}`;
+}
+
+function renderOutcome(){
+  const outcome = OUTCOMES[state.nodeId];
+  const tree = state.treeId ? DECISION_TREES.find(t => t.id === state.treeId) : null;
+  const catId = tree ? tree.category : state.categoryId;
+  const cat = CATEGORIES.find(c => c.id === catId);
+  const band = outcome.band || (outcome.severity === 'high' ? 'Seek medical attention' : outcome.severity === 'mid' ? 'Caution — monitor closely' : 'Generally manageable');
+  return `
+  <div class="tk-body" style="padding-top:32px;">
+    <div class="wrap">
+      <button class="back-link" data-nav="category" data-id="${cat.id}">&larr; ${escapeHtml(cat.name)}</button>
+      ${crisisLine(cat)}
+      <div class="outcome-card">
+        <div class="outcome-band ${outcome.severity}">${escapeHtml(band)}</div>
+        <div class="outcome-body">
+          <h2>${escapeHtml(outcome.title)}</h2>
+          ${outcome.symptoms ? `<h5>What it typically feels like</h5><p>${escapeHtml(outcome.symptoms)}</p>` : ''}
+          <h5>What's likely going on</h5>
+          <p>${escapeHtml(outcome.body)}</p>
+          <div class="action-box">
+            <h5>Do this now</h5>
+            <p>${escapeHtml(outcome.action)}</p>
+          </div>
+          ${outcome.prevention ? `<h5>Prevention</h5><p>${escapeHtml(outcome.prevention)}</p>` : ''}
+          <div class="source-line">Source: <a href="${escapeHtml(outcome.source.url)}" target="_blank" rel="noopener">${escapeHtml(outcome.source.title)}</a> &mdash; ${escapeHtml(outcome.source.host)}</div>
+        </div>
+      </div>
+      <div class="tk-nav" style="margin-top:20px;">
+        ${tree ? `<button type="button" class="tk-btn ghost small" data-nav="tree-start" data-id="${tree.id}">Start over &rarr;</button>` : ''}
+        <button type="button" class="tk-btn ghost small" data-nav="category" data-id="${cat.id}">All ${escapeHtml(cat.name)} topics &rarr;</button>
+        <a class="tk-btn ghost small" href="contribute.html#${state.nodeId}">Suggest a change to this page</a>
+      </div>
+    </div>
+  </div>
+  ${footer()}`;
+}
+
+function attachEvents(){
+  document.querySelectorAll('[data-nav]').forEach(el => {
+    el.addEventListener('click', () => {
+      const nav = el.dataset.nav;
+      if(nav === 'hub'){
+        state = { screen:'hub', categoryId:null, treeId:null, nodeId:null, step:1 };
+      }
+      else if(nav === 'category'){
+        state = { screen:'category', categoryId:el.dataset.id, treeId:null, nodeId:null, step:1 };
+      }
+      else if(nav === 'tree-start'){
+        const tree = DECISION_TREES.find(t => t.id === el.dataset.id);
+        state = { screen:'tree-question', categoryId:tree.category, treeId:tree.id, nodeId:tree.root, step:1 };
+      }
+      else if(nav === 'answer'){
+        const node = NODES[state.nodeId];
+        const chosen = node.opts[parseInt(el.dataset.idx, 10)];
+        state.step = (state.step || 1) + 1;
+        state.nodeId = chosen.next;
+        state.screen = NODES[chosen.next] ? 'tree-question' : 'tree-outcome';
+      }
+      else if(nav === 'direct'){
+        state = { screen:'tree-outcome', categoryId:state.categoryId, treeId:null, nodeId:el.dataset.id, step:1 };
+      }
+      render();
+    });
+  });
+}
+
+function render(){
+  const app = document.getElementById('app');
+  const views = { hub:renderHub, category:renderCategory, 'tree-question':renderTreeQuestion, 'tree-outcome':renderOutcome };
+  app.innerHTML = views[state.screen]();
+  window.scrollTo(0, 0);
+  attachEvents();
+}
+
+render();
+
+if('serviceWorker' in navigator){
+  window.addEventListener('load', () => {
+    navigator.serviceWorker.register('sw.js').catch(() => {
+      // Service workers need http(s); file:// still works, just not installable or offline.
+    });
+  });
+}

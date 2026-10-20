@@ -5,7 +5,7 @@
    Bump CACHE_VERSION whenever index.html or any shell file changes so
    returning users pick up the new content. */
 
-const CACHE_VERSION = 'tk-v3';
+const CACHE_VERSION = 'tk-v4';
 const SHELL_CACHE = `${CACHE_VERSION}-shell`;
 const RUNTIME_CACHE = `${CACHE_VERSION}-runtime`;
 
@@ -16,7 +16,13 @@ const SHELL_ASSETS = [
   './icon-192.png',
   './icon-512.png',
   './favicon-32.png',
-  './assets/cairn-logo.svg'
+  './assets/cairn-logo.svg',
+  './styles.css',
+  './app.js',
+  './contribute.html',
+  './contribute.js',
+  './data/physical.js',
+  './data/mental.js'
 ];
 
 self.addEventListener('install', (event) => {
@@ -41,6 +47,18 @@ self.addEventListener('activate', (event) => {
 self.addEventListener('fetch', (event) => {
   const { request } = event;
   if (request.method !== 'GET') return;
+
+  // Content files: network first, so edits reach users; cache is the offline fallback.
+  const reqUrl = new URL(request.url);
+  if (reqUrl.origin === self.location.origin && reqUrl.pathname.includes('/data/')) {
+    event.respondWith(
+      fetch(request).then((res) => {
+        if (res && res.ok) caches.open(RUNTIME_CACHE).then((c) => c.put(request, res.clone()));
+        return res;
+      }).catch(() => caches.match(request, { ignoreSearch: true }))
+    );
+    return;
+  }
 
   const url = new URL(request.url);
   const isFont = url.hostname === 'fonts.googleapis.com' || url.hostname === 'fonts.gstatic.com';

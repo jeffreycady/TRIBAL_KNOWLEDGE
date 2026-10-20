@@ -1,59 +1,33 @@
-# Tribal Knowledge — Roadmap
+# Roadmap
 
-Goal: a Tribal Knowledge app people can install on iPhone and Android, that works offline, picks up content updates, and lets others contribute knowledge through a reviewed process. Branding follows jcady.org (cairn logo, Jeff Cady link).
+Goal: Tribal Knowledge on iPhone and Android, works offline, picks up content updates, and lets anyone contribute knowledge through a reviewed GitHub process. Branding follows jcady.org.
 
-## Phase 1 — Installable and offline (done)
+## Status
 
-- `manifest.json`, service worker (`sw.js`), full-bleed icons from the cairn logo.
-- App shell and assets cached on first load; works with no signal.
-- Branding: cairn logo, jcady.org link in the hub and footer.
-- Collapse tree routes chest symptoms to the cardiac outcome.
+| Phase | Status | Notes |
+|---|---|---|
+| 1. Installable web app, offline | Done | Manifest, service worker, full-bleed icons. |
+| 2. Branding | Done | Cairn logo, jcady.org links, favicon. |
+| 3. Content as data | Done (JS, not CSV) | `data/physical.js`, `data/mental.js`. CSV import/export is still open. |
+| 4. Mental & Psychological | Done (v1) | 4 trees, 9 outcomes, sourced. Needs wording review. |
+| 5. Contribute flow in the app | Done (v1) | `contribute.html`: how it works, the logic, edit links, rules. |
+| 6. Android APK | Next | See `docs/ANDROID.md`. Needs a signing key and a machine with the Android SDK. |
+| 7. Gear & Logistics | Planned | Next category after APK. |
+| 8. Training | Planned | |
+| 9. Hosting review | Open | GitHub Pages now. Revisit with Cloudflare Pages when we need headers or a submission queue. See `docs/ARCHITECTURE.md`. |
 
-## Phase 2 — Content as data
+## Decisions (from Jeff)
 
-Move the decision trees out of `index.html` into flat files so content can be edited, reviewed, and contributed without touching app code.
+- **Medical review:** Not required right now. Moving faster. A clinical reviewer can be added later, on the backend or as a step in the contribution flow.
+- **Contributions:** GitHub only. The flow lives in the app (`contribute.html`), and each item links to its file.
+- **Install path:** Installable web app first, then the APK.
+- **Mental & Psychological:** Done next, with science behind each piece of advice, following UERA's source-grounding rules.
+- **Live site:** Publish directly to tk.jcady.org for now.
 
-```
-content/
-  categories.csv   id, name, description, ready
-  trees.csv        id, title, blurb, root_node
-  nodes.csv        id, text
-  options.csv      node_id, position, label, next_id      (next_id = a node or an outcome)
-  outcomes.csv     id, severity, title, symptoms, body, action, prevention, source_title, source_host, source_url
-  sources.csv      id, title, host, url, checked_on        (one row per cited source)
-```
+## Open items
 
-- A build script (`scripts/build-content.js`) validates the CSVs and writes `content/content.json` plus `content/version.json` (content version and date).
-- Validator rules: every `next_id` resolves; every outcome has a source with a URL; every `severity:high` outcome is reachable; no node is unreachable from a tree; no outcome is missing its title, action, or source.
-- The validator runs on every pull request, so a bad row can't merge.
-
-## Phase 3 — Content updates while offline
-
-- The app renders from `content.json`, not hard-coded data.
-- When online, the app fetches `version.json`. If the version is newer, it fetches `content.json` and stores it locally, then shows a short "Content updated" note.
-- Offline, the app uses the last content it stored, so the app never has nothing to show.
-- Service worker: content files use **network-first** (not cache-first), so updates actually arrive. Everything else stays cache-first.
-
-## Phase 4 — Contributing knowledge
-
-- `CONTRIBUTING.md`: the rules for content. Every outcome needs a cited source. "Do this now" has to be specific and actionable. Anything that could be an emergency gets a red-flag route. Medical content is never written as a diagnosis.
-- `/contribute.html`: a readable view of the logic (each tree as a list of questions and answers, no code) and a "Suggest a change" button on each question and outcome.
-- Suggestions open a pre-filled GitHub issue (template: what's changing, why, source). For CSV-savvy contributors, the page also offers a ready-to-edit CSV row.
-- Nothing a stranger submits goes live directly. A maintainer reviews every change before it reaches `content/`.
-
-## Phase 5 — Mobile apps
-
-Two routes, in order:
-
-1. **Install from the browser (available now).** iPhone: Safari → Share → Add to Home Screen. Android: install prompt. Works offline, updates content, no store account needed.
-2. **App Store and Google Play.** Wrap the same web app with Capacitor, so one codebase produces both apps. Content updates still come from `content.json`, so most fixes don't need a store release.
-   - Costs: Apple Developer Program (US$99/year); Google Play (US$25 one-time).
-   - Review risk: Apple sometimes rejects thin web wrappers as "minimum functionality." An offline, content-heavy app like this usually passes, but that isn't guaranteed. Medical-adjacent apps also need a clear "not medical advice" disclaimer, which is already in place.
-
-## Open decisions (need Jeff)
-
-1. **Medical review.** Should a second reviewer (for example a sports medicine clinician or certified coach) approve medical content before it merges? Recommended, because outcomes give health guidance.
-2. **Contribution channel.** GitHub only (issues and pull requests), or also a non-GitHub form that a maintainer converts? GitHub only is simpler and safer; a form adds reach but more moderation.
-3. **Store timing.** Start with the installable web app and add store builds once content is solid, or prepare the store builds now?
-4. **Build order for categories.** Mental & Psychological next, or audit Physical & Medical first (the source and wording review from before)?
-5. **Publishing.** The local commit (`a9243d5`) and the branding changes are not pushed. The repo is served at tk.jcady.org, so pushing updates the live site.
+- Android signing key and `assetlinks.json` (needs a build on a machine with the Android SDK; the sandbox can't reach Google's SDK servers).
+- Mental & Psychological wording review. Two items are plain-language rules, not proven: the "pause before quitting" rule and the self-talk advice.
+- Physical & Medical wording review (see the earlier audit): cramping cause and the hyponatremia sports-drink line.
+- Check the physical source URLs (not all were checked this pass).
+- Decide on CSV import/export for contributors who prefer spreadsheets.
