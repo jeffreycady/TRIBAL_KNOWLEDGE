@@ -39,6 +39,12 @@ Object.assign(OUTCOMES, {
   out_mid_focus:{
     severity:'mid', title:"Shift your focus to something you can control",
     body:"Brick and colleagues (2016) reviewed how attention shapes effort and pacing in endurance events. Focusing on a self-regulation cue, like technique, cadence, or relaxing, can help pacing without raising perceived effort. A heavy focus on bodily sensations can make effort feel harder. Distraction can lower perceived effort, but in a self-paced race it can lead to a slower pace than you'd choose.",
+    steps:[
+      "Pick one cue for the next 10 minutes: a cadence count, relaxed shoulders, or a breathing rhythm.",
+      "Fuel and drink on schedule.",
+      "After 10 minutes, check how you feel.",
+      "If it's getting worse rather than easier, use the physical tree."
+    ],
     action:"Pick one cue for the next 10 minutes, such as a cadence count, relaxed shoulders, or a breathing rhythm. Fuel and drink on schedule. Reassess after 10 minutes. If it's getting worse rather than easier, check the physical tree before you push on.",
     source:{title:"Thinking and Action: A Cognitive Perspective on Self-Regulation during Endurance Performance", host:"Frontiers in Physiology (2016)", url:"https://www.frontiersin.org/articles/10.3389/fphys.2016.00159/full"}
   },
@@ -57,6 +63,11 @@ Object.assign(OUTCOMES, {
   out_motivation_autonomy:{
     severity:'low', title:"Motivation dip: reconnect with why you train",
     body:"Self-determination theory holds that motivation tends to last when it feels self-chosen and when it supports three needs: feeling in control, feeling capable, and feeling connected to others. A slump often means one of those has gone missing, such as training that feels imposed or no one to share it with.",
+    steps:[
+      "Choose one session this week that you design yourself.",
+      "Set a goal you can control.",
+      "Train with someone, or tell someone your plan."
+    ],
     action:"This week, choose one session you design yourself with a goal you control. Train with someone, or tell someone your plan. If the dip lasts more than about two weeks, or affects sleep or mood, use the next path on this page.",
     source:{title:"Self-determination theory", host:"Newcastle University Theory Library", url:"https://open.ncl.ac.uk/theories/20/self-determination-theory/"}
   },
@@ -75,6 +86,11 @@ Object.assign(OUTCOMES, {
   out_self_talk:{
     severity:'low', title:"Change the words, change the effort",
     body:"A 2011 meta-analysis of 32 studies found self-talk improved sport performance on average. Instructional self-talk, short cues about what to do, helped most on fine-motor skills, and training in self-talk beat no training.",
+    steps:[
+      "Notice when you say \"I can't\".",
+      "Swap it for a short, specific cue like \"easy legs,\" \"quick feet,\" or \"next aid station.\"",
+      "Practice the cue in training so it comes easily on race day."
+    ],
     action:"Swap 'I can't' for a short, specific cue like 'easy legs,' 'quick feet,' or 'next aid station.' Practice it in training so it comes easily on race day.",
     source:{title:"Self-Talk and Sports Performance: A Meta-Analysis", host:"University of Thessaly repository (2011 meta-analysis)", url:"https://ir.lib.uth.gr/xmlui/handle/11615/28461"}
   }

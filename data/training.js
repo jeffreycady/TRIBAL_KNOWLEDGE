@@ -15,6 +15,12 @@ Object.assign(OUTCOMES, {
     prerace:true,
     severity:'low', title:"Taper: cut volume, not the whole plan",
     body:"A meta-analysis of tapering in competitive athletes (Bosquet and colleagues, 2007) found that a taper of about two weeks gave the best gains. The largest benefit came from cutting training volume substantially, by roughly 41 to 60%, with the cut getting steeper toward the end. Tapers that kept intensity or frequency unchanged gave smaller benefits.",
+    steps:[
+      "About two weeks before race day, start cutting back your weekly training a little.",
+      "In the final week, make the biggest cut.",
+      "Keep your easy runs in the plan, but don't add new hard sessions.",
+      "Keep your normal sleep, meals, and routine."
+    ],
     action:"Start reducing training volume about two weeks before the race, with the biggest cut in the final week. Don't add new hard sessions during the taper.",
     source:{title:"Effects of tapering on performance: a meta-analysis", host:"Medicine & Science in Sports & Exercise (2007) / PubMed", url:"https://pubmed.ncbi.nlm.nih.gov/17762369/"}
   },
