@@ -19,7 +19,7 @@ const OUTCOMES = {
     severity:'high', title:"Possible exercise-associated hyponatremia",
     symptoms:"Nausea, bloating, puffiness or swelling (hands, feet), headache — after drinking a lot of plain water over a long effort.",
     body:"Bloating, puffiness, or swelling after heavy plain-water intake over a long effort is a real warning sign for exercise-associated hyponatremia (low blood sodium) — a condition that gets worse, not better, with more water. Mild cases cause nausea and bloating; severe cases progress to confusion and can be life-threatening.",
-    action:"Stop drinking plain water immediately. If you have real food or salty snacks, take those in — not a sports drink alone, which usually isn't concentrated enough to correct this quickly. Watch closely for any confusion or worsening symptoms: if that happens, this is now a medical emergency, call for help.",
+    action:"Stop drinking plain water now. Take in salty food or a drink with added sodium, in small amounts, and sit down to rest. Many sports drinks contain less sodium than long efforts call for, so salty food is a useful addition. If you become confused, very drowsy, or start vomiting repeatedly, this is a medical emergency: call for help now.",
     source:{title:"Pathophysiology and treatment of exercise-associated hyponatremia", host:"National Library of Medicine", url:"https://www.ncbi.nlm.nih.gov/pmc/articles/PMC12847173/"}
   },
   out_hypoglycemia:{

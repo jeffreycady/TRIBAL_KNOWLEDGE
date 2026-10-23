@@ -8,9 +8,9 @@ Object.assign(OUTCOMES, {
   out_fuel_ultra:{
     sports:['ultra','trail-run'],
     severity:'low', title:"Long race: eat carbohydrate every hour, not just when you're hungry",
-    body:"For efforts of about an hour or longer, the common guidance is 30 to 60 g of carbohydrate per hour. For events of 2.5 hours or more, a 2013 review by Jeukendrup describes up to about 90 g per hour, using a mix of glucose or maltodextrin and fructose, for well-trained athletes. Lower intensity or less experienced runners may need less. The figure is in grams, not per kilogram of body weight.",
+    body:"The ISSN position stand on ultramarathon nutrition (2019) recommends 150 to 400 calories per hour during racing, with 30 to 50 grams of carbohydrate per hour, from a variety of calorie-dense foods. A 2019 review by Costa and colleagues suggests about 90 grams of carbohydrate per hour for runs of 3 hours or more, but notes that this may not be tolerable during a race for everyone. Newer research suggests trained athletes can tolerate more, up to about 120 grams per hour, and that gut training is what makes higher intakes possible. Start low and build up.",
     action:"Set a schedule for eating, not a feel-based one. Start near the low end of the range for your effort and build up only if your stomach handles it. Practice the amount and the foods you plan to use on your long training runs, so race day has no surprises.",
-    source:{title:"SSE #108: Multiple Transportable Carbohydrates and Their Benefits", host:"Gatorade Sports Science Institute (GSSI), Sports Science Exchange (2013)", url:"https://www.gssiweb.org/sports-science-exchange/article/sse-108-multiple-transportable-carbohydrates-and-their-benefits"}
+    source:{title:"International Society of Sports Nutrition Position Stand: nutritional considerations for single-stage ultra-marathon training and racing", host:"Journal of the International Society of Sports Nutrition (2019), doi:10.1186/s12970-019-0312-9", url:"https://doi.org/10.1186/s12970-019-0312-9"}
   },
   out_lost:{
     sports:['ultra','trail-run','hiking','sky','skimo','mountaineering','trekking'],
