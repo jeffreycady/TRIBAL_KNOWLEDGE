@@ -12,6 +12,8 @@ Most of what makes endurance sports dangerous for newcomers isn't the distance. 
 - Works offline once loaded. It can be installed to a phone home screen.
 - Shows the logic and lets anyone suggest a change (`contribute.html`).
 
+Methodology (evidence standard, scope limits, sport tagging) is in [docs/METHODOLOGY.md](docs/METHODOLOGY.md).
+
 ## Categories
 
 | Category | Status |

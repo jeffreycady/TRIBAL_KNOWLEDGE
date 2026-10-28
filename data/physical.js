@@ -12,8 +12,8 @@ const OUTCOMES = {
     severity:'mid', title:"Likely heat exhaustion",
     symptoms:"Feeling hot, flushed, or overheated, often with nausea, heavy sweating, weakness, dizziness, headache — while still thinking and speaking clearly. Can happen even when it's not especially hot outside, particularly during hard effort.",
     body:"Feeling hot or overheated with nausea and normal, clear thinking is the classic picture of heat exhaustion — uncomfortable and worth taking seriously, but distinct from heat stroke as long as mental status stays normal. It can progress to heat stroke if ignored.",
-    action:"Cool down first — that's the single most effective thing you can do, often more than anything else. Get to shade or cooler air, remove excess clothing/gear, and actively cool your skin (water, wet cloths, ice on neck/wrists) rather than just resting and waiting it out. Lie down with legs elevated, and sip fluids once the nausea allows it. Re-check mental status every few minutes — any confusion means this has escalated: call emergency services immediately.",
-    source:{title:"Heat Illness in Sports", host:"Physiopedia", url:"https://www.physio-pedia.com/Heat_Illness_in_Sports"}
+    action:"Stop exercising and get out of the heat. Move to shade or cooler air and remove extra clothing or gear. Cool your skin actively with water or wet cloths, and rest. Sip fluids once nausea allows, without forcing large amounts. Re-check how you are thinking every few minutes. If you become confused, stop responding normally, faint, or your condition gets worse, call emergency services now: this can be heat stroke, which is a medical emergency.",
+    source:{title:"ACSM Expert Consensus Statement on Exertional Heat Illness: Recognition, Management, and Return to Activity", host:"Current Sports Medicine Reports (2023), doi:10.1249/JSR.0000000000001058", url:"https://doi.org/10.1249/JSR.0000000000001058"}
   },
   out_hyponatremia:{
     severity:'high', title:"Possible exercise-associated hyponatremia",
